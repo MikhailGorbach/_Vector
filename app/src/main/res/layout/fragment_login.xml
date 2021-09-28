@@ -5,19 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_log"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="200dp"
-        android:text="LOGIN"
-        android:textSize="36dp"
-        android:background="@color/teal_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/log_et_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:ems="10"
+            android:hint="Логин"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/log_et_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:ems="10"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="300dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/log_rb_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Вход" />
+
+            <RadioButton
+                android:id="@+id/log_rb_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Регистрация" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
