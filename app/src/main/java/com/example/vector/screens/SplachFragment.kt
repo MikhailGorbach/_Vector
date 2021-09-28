@@ -12,7 +12,7 @@ class SplachFragment: Fragment(R.layout.fragment_splash) {
         super.onViewCreated(view, savedInstanceState)
 
         view.postDelayed({
-            findNavController().navigate(R.id.action_splachFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_splachFragment_to_registerFragment)
         }, 3000)
     }
 
