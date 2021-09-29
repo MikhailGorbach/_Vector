@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
 
-class SplachFragment: Fragment(R.layout.fragment_splash) {
+class SplashFragment: Fragment(R.layout.fragment_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         view.postDelayed({
-            findNavController().navigate(R.id.action_splachFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
         }, 3000)
     }
 
