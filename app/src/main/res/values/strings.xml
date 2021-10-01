@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Vector</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="agree">Согласен с правилами</string>
 </resources>

@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/drawable/rounded_button.xml" value="0.2703125" />
+        <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/drawable/rounded_button_blue.xml" value="0.2703125" />
         <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/Documents/GitHub/_Vector/app/src/main/res/layout/fragment_register.xml" value="0.2" />
       </map>
     </option>
   </component>
