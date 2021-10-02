@@ -2,4 +2,6 @@
     <string name="app_name">Vector</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="agree">Согласен с правилами</string>
+    <string name="reg">Регистрация</string>
+    <string name="enter">Вход</string>
 </resources>

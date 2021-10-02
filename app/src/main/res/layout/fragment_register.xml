@@ -5,31 +5,165 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/reg_til_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="25dp"
-        android:hint="Логин"
-        android:minHeight="48dp"
+    <Button
+        android:id="@+id/reg_btn_register"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/reg"
+        app:layout_constraintBottom_toTopOf="@+id/reg_til_login"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reg_btn_enter"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/reg_btn_enter"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/enter"
+        app:layout_constraintBottom_toTopOf="@+id/reg_til_login"
+        app:layout_constraintEnd_toStartOf="@+id/reg_btn_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/reg_til_email"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_til_login"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="135dp"
         android:layout_marginEnd="25dp"
-        android:hint="Email"
-        android:minHeight="48dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@+id/reg_til_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_login" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_tiet_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_person_ic"
+            android:hint="Логин"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_til_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@+id/reg_til_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_til_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_tiet_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_email_ic"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_til_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:layout_constraintBottom_toTopOf="@+id/reg_til_pass_again"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_til_email"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/blue">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_tiet_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_lock_ic"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_til_pass_again"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:layout_constraintBottom_toTopOf="@+id/reg_sw_agree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_til_password"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/blue">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reg_tiet_pass_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_lock_ic"
+            android:hint="Повторить пароль"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Switch
+        android:id="@+id/reg_sw_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:minHeight="48dp"
+        android:switchPadding="145dp"
+        android:text="@string/agree"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_til_pass_again"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reg_bt_enter"
@@ -37,40 +171,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
         android:layout_marginEnd="105dp"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/rounded_button_blue"
+        android:layout_marginBottom="110dp"
+        android:background="@drawable/rounded_button_transparent"
         android:text="@string/registration"
         android:textColor="@color/blue"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="122dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_email" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="260dp"
-        android:minHeight="48dp"
-        android:text="@string/agree"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        app:layout_constraintTop_toBottomOf="@+id/reg_sw_agree"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
