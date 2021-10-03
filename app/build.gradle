@@ -6,6 +6,11 @@ plugins {
 android {
     compileSdk 31
 
+    dataBinding{
+        //noinspection DataBindingWithoutKapt
+        enabled true
+    }
+
     defaultConfig {
         applicationId "com.example.vector"
         minSdk 21

@@ -42,6 +42,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="135dp"
         android:layout_marginEnd="25dp"
+        app:errorEnabled="true"
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="clear_text"
@@ -73,6 +74,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         app:counterEnabled="true"
+        app:errorEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@+id/reg_til_password"
@@ -101,6 +103,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         app:counterEnabled="true"
+        app:errorEnabled="true"
         app:counterMaxLength="20"
         app:layout_constraintBottom_toTopOf="@+id/reg_til_pass_again"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +134,7 @@
         android:layout_marginEnd="25dp"
         app:counterEnabled="true"
         app:counterMaxLength="20"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/reg_sw_agree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +170,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/reg_bt_enter"
+        android:id="@+id/btn_new_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
