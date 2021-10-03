@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/reg_btn_register"
+        android:id="@+id/registrBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -14,11 +14,11 @@
         android:backgroundTint="@color/blue"
         android:text="@string/reg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reg_btn_enter"
+        app:layout_constraintStart_toEndOf="@+id/loginBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/reg_btn_enter"
+        android:id="@+id/loginBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
@@ -28,34 +28,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <fragment
-        android:id="@+id/fragment_log"
-        android:name="com.example.vector.screens.LoginFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="135dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="409dp"
+        android:layout_height="649dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_login">
-
-    </fragment>
-
-    <fragment
-        android:visibility="invisible"
-        android:id="@+id/fragmen_reg"
-        android:name="com.example.vector.screens.RegisterFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="135dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_register">
-
-    </fragment>
+        app:navGraph="@navigation/registration_nav_graph" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

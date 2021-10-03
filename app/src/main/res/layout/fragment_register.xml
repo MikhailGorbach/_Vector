@@ -5,54 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/reg_btn_register"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/reg"
-        app:layout_constraintBottom_toTopOf="@+id/reg_til_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reg_btn_enter"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/reg_btn_enter"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/enter"
-        app:layout_constraintBottom_toTopOf="@+id/reg_til_login"
-        app:layout_constraintEnd_toStartOf="@+id/reg_btn_register"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_til_login"
+        android:id="@+id/loginTl"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="25dp"
-        app:errorEnabled="true"
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@+id/reg_til_email"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/emailTl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_tiet_login"
+            android:id="@+id/loginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_person_ic"
@@ -67,7 +39,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_til_email"
+        android:id="@+id/emailTl"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,13 +49,13 @@
         app:errorEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@+id/reg_til_password"
+        app:layout_constraintBottom_toTopOf="@+id/pwdFirstTl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_login">
+        app:layout_constraintTop_toBottomOf="@+id/loginTl">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_tiet_email"
+            android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_email_ic"
@@ -96,7 +68,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_til_password"
+        android:id="@+id/pwdFirstTl"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,15 +77,15 @@
         app:counterEnabled="true"
         app:errorEnabled="true"
         app:counterMaxLength="20"
-        app:layout_constraintBottom_toTopOf="@+id/reg_til_pass_again"
+        app:layout_constraintBottom_toTopOf="@+id/pwdSecondTl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_email"
+        app:layout_constraintTop_toBottomOf="@+id/emailTl"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/blue">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_tiet_password"
+            android:id="@+id/pwdFirstEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_lock_ic"
@@ -126,7 +98,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reg_til_pass_again"
+        android:id="@+id/pwdSecondTl"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -135,15 +107,15 @@
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/reg_sw_agree"
+        app:layout_constraintBottom_toTopOf="@+id/agreeSwtch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_password"
+        app:layout_constraintTop_toBottomOf="@+id/pwdFirstTl"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/blue">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_tiet_pass_again"
+            android:id="@+id/pwdSecondEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/custom_lock_ic"
@@ -156,21 +128,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Switch
-        android:id="@+id/reg_sw_agree"
+        android:id="@+id/agreeSwtch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:minHeight="48dp"
         android:switchPadding="145dp"
         android:text="@string/agree"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_til_pass_again"
+        app:layout_constraintTop_toBottomOf="@+id/pwdSecondTl"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_new_user"
+        android:id="@+id/registrationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
@@ -184,7 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_sw_agree"
+        app:layout_constraintTop_toBottomOf="@+id/agreeSwtch"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

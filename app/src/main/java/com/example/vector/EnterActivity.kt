@@ -1,26 +1,23 @@
 package com.example.vector
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.vector.screens.LoginFragment
-import com.example.vector.screens.RegisterFragment
+import androidx.navigation.findNavController
 
 class EnterActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_enter)
-        val btn_reg = findViewById<Button>(R.id.reg_btn_register)
-        btn_reg.setOnClickListener {
-            intent = Intent(this, RegisterFragment::class.java)
-            startActivity(intent)
+        findViewById<Button>(R.id.registrBtn).setOnClickListener {
+            if (findNavController(R.id.fragmentContainerView).currentDestination?.id != R.id.registerFragment) {
+                findNavController(R.id.fragmentContainerView).navigate(R.id.action_loginFragment_to_registerFragment)
+            }
         }
-        val btn_log = findViewById<Button>(R.id.reg_btn_enter)
-        btn_log.setOnClickListener {
-            intent = Intent(this, LoginFragment::class.java)
-            startActivity(intent)
+        findViewById<Button>(R.id.loginBtn).setOnClickListener {
+            if (findNavController(R.id.fragmentContainerView).currentDestination?.id != R.id.loginFragment) {
+                findNavController(R.id.fragmentContainerView).navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
     }
 }
