@@ -9,16 +9,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/loginTil"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="25dp"
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,23 +26,23 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/loginEdt"
             android:layout_width="match_parent"
-            android:drawableStart="@drawable/custom_person_ic"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_person_ic"
             android:hint="Логин" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pwdTil"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/blue"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTil">
+        app:layout_constraintTop_toBottomOf="@+id/loginTil"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/blue">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pwdEdt"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="120dp"
         android:text="Вход"
         app:layout_constraintEnd_toEndOf="parent"
