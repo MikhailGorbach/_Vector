@@ -27,6 +27,8 @@
             android:id="@+id/loginEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:maxLines="1"
             android:drawableStart="@drawable/custom_person_ic"
             android:hint="Логин" />
     </com.google.android.material.textfield.TextInputLayout>
