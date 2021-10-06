@@ -5,111 +5,153 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="255dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="80dp"
-        android:orientation="horizontal"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loginTl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/reg_rb_log"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:height="48dp"
-            android:text="Вход" />
+            android:drawableStart="@drawable/custom_person_ic"
+            android:hint="Логин"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/log_rb_reg"
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailTl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginTl">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Регистрация" />
+            android:drawableStart="@drawable/custom_email_ic"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/reg_et_log"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pwdFirstTl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:hint="Логин"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/reg_et_email"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTl"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/blue">
 
-    <EditText
-        android:id="@+id/reg_et_email"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pwdFirstEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_lock_ic"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pwdSecondTl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/reg_et_pass"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_et_log"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintTop_toBottomOf="@+id/pwdFirstTl"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/blue">
 
-    <EditText
-        android:id="@+id/reg_et_pass"
-        android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pwdSecondEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/custom_lock_ic"
+            android:hint="Повторить пароль"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Switch
+        android:id="@+id/agreeSwtch"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:hint="Пароль"
-        android:inputType="textPassword"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/reg_et_pass_again"
+        android:switchPadding="145dp"
+        android:text="@string/agree"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_et_email" />
+        app:layout_constraintTop_toBottomOf="@+id/pwdSecondTl"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-    <EditText
-        android:id="@+id/reg_et_pass_again"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registrationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:hint="Повторить пароль"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginEnd="105dp"
+        android:background="@drawable/rounded_button_transparent"
+        android:text="@string/registration"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_et_pass" />
-
-    <Button
-        android:id="@+id/reg_bt_enter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginRight="120dp"
-        android:layout_marginBottom="256dp"
-        android:text="Вход"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_et_pass_again"
-        app:layout_constraintVertical_bias="0.472" />
+        app:layout_constraintTop_toBottomOf="@+id/agreeSwtch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
