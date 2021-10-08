@@ -2,53 +2,68 @@ package com.example.vector.screens
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
+import com.example.vector.data.User
+import com.example.vector.data.UserViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.fragment_register.*
+import org.w3c.dom.Text
 
 class RegisterFragment: Fragment(R.layout.fragment_register)
 {
-    var login = view?.findViewById<TextInputEditText>(R.id.loginEt)
-    var pwd = view?.findViewById<TextInputEditText>(R.id.pwdSecondEt)
-    var email = view?.findViewById<TextInputEditText>(R.id.emailEt)
-    var pwdAgain = view?.findViewById<TextInputEditText>(R.id.pwdSecondEt)
+    private lateinit var mUserViewModel: UserViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_register, container, false)
 
-    var loginTl = view?.findViewById<TextInputLayout>(R.id.loginTl)
-    var emailTl = view?.findViewById<TextInputLayout>(R.id.emailTl)
-    var pwdTl = view?.findViewById<TextInputLayout>(R.id.pwdFirstTl)
-    var pwdAgainTl = view?.findViewById<TextInputLayout>(R.id.pwdSecondTl)
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-    var enter = view?.findViewById<AppCompatButton>(R.id.registrationBtn)
-    var agree = view?.findViewById<SwitchCompat>(R.id.agreeSwtch)
+        view.findViewById<AppCompatButton>(R.id.registrationBtn).setOnClickListener {
+            insertDataToDatabase()
+        }
 
-    lateinit var binding : RegisterFragment
+        return view
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        login?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Toast.makeText(activity, "before", Toast.LENGTH_SHORT).show()
-            }
+    private fun insertDataToDatabase() {
+        val login = loginEt.text.toString()
+        val email = emailEt.text.toString()
+        val password = pwdFirstEt.text.toString()
 
-            override fun afterTextChanged(p0: Editable?) {
-                Toast.makeText(activity, "after", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Toast.makeText(activity, "onText", Toast.LENGTH_SHORT).show()
-            }
-        })
-        view.findViewById<Button>(R.id.registrationBtn).setOnClickListener {
+        if (inputCheck(login, email, password)) {
+            val user = User(0, login, email, password)
+            mUserViewModel.addUser(user)
+            Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
+        else {
+            Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun inputCheck(login: String, email: String, password: String): Boolean {
+        return !(TextUtils.isEmpty(login) && TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
     }
 }
 
+/*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Button>(R.id.registrationBtn).setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+    }*/
