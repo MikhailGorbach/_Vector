@@ -37,16 +37,15 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
         view.findViewById<AppCompatButton>(R.id.registrationBtn).setOnClickListener {
             insertDataToDatabase()
         }
-
         return view
     }
-
     private fun insertDataToDatabase() {
         val login = loginEt.text.toString()
         val email = emailEt.text.toString()
         val password = pwdFirstEt.text.toString()
+        val passwordAgain = pwdSecondEt.text.toString()
 
-        if (inputCheck(login, email, password)) {
+        if (inputCheck(login, email, password, passwordAgain)) {
             val user = User(0, login, email, password)
             mUserViewModel.addUser(user)
             Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_LONG).show()
@@ -56,14 +55,7 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
             Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_LONG).show()
         }
     }
-    private fun inputCheck(login: String, email: String, password: String): Boolean {
-        return !(TextUtils.isEmpty(login) && TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
+    private fun inputCheck(login: String, email: String, password: String, passwordAgain: String): Boolean {
+        return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || passwordAgain != password || !agreeSwtch.isActivated)
     }
 }
-
-/*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.registrationBtn).setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
-    }*/
