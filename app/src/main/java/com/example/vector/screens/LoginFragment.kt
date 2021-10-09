@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -24,19 +25,30 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
         else {
             view.findViewById<Button>(R.id.enterBtn).setOnClickListener {
                 isLogined = true
-                saveData(isLogined)
-                startActivity(Intent(requireActivity(), MainActivity::class.java))
+                if (saveData(isLogined)) {
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                }
             }
         }
     }
-    private fun saveData(isLogined: Boolean) {
+    private fun saveData(isLogined: Boolean): Boolean {
         val loginText = loginEdt.text.toString()
         val passwordText = pwdEdt.text.toString()
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString("STRING_KEY", "Login: " + loginText + "\nPassword: " + passwordText)
-            putBoolean("USER_DEFINED", isLogined)
-        }.apply()
-        Toast.makeText(activity, "Data saved", Toast.LENGTH_LONG).show()
+        if (fieldsCheck(loginText, passwordText)) {
+            val editor = sharedPreferences.edit()
+            editor.apply {
+                putString("STRING_KEY", "Login: " + loginText + "\nPassword: " + passwordText)
+                putBoolean("USER_DEFINED", isLogined)
+            }.apply()
+            Toast.makeText(activity, "Данные сохранены", Toast.LENGTH_LONG).show()
+            return true
+        }
+        else {
+            Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_LONG).show()
+        }
+        return false
+    }
+    private fun fieldsCheck(loginText: String, passwordText: String): Boolean {
+        return !(TextUtils.isEmpty(loginText) || TextUtils.isEmpty(passwordText))
     }
 }

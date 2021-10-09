@@ -1,5 +1,6 @@
 package com.example.vector.screens
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -24,6 +25,7 @@ import org.w3c.dom.Text
 
 class RegisterFragment: Fragment(R.layout.fragment_register)
 {
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var mUserViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,12 +51,23 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
             val user = User(0, login, email, password)
             mUserViewModel.addUser(user)
             Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_LONG).show()
+            dataToStorage(login, email, password)
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
         else {
             Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun dataToStorage(login: String, email: String, password: String) {
+        val editor = sharedPreferences.edit()
+        editor.apply {
+            putString("USER_LOGIN", login)
+            putString("USER_EMAIL", email)
+            putString("USER_PASSWORD", password)
+        }.apply()
+    }
+
     private fun inputCheck(login: String, email: String, password: String, passwordAgain: String): Boolean {
         return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || passwordAgain != password || !agreeSwtch.isActivated)
     }
