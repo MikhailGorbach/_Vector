@@ -16,8 +16,8 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             sharedPreferences = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-            val name = sharedPreferences.getString("STRING_KEY", null)
-            view.findViewById<TextView>(R.id.loginTv).text = name
+            val info = sharedPreferences.getString("USER_LOGIN_PASSWORD", null)
+            view.findViewById<TextView>(R.id.loginTv).text = info
             view.findViewById<AppCompatButton>(R.id.logOutBtn).setOnClickListener {
                 val isLogined = false
                 val editor = sharedPreferences.edit()

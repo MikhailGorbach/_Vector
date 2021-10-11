@@ -21,4 +21,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             repository.addUser(user)
         }
     }
+    fun findUser(login : String, password : String) : User? {
+        return repository.findUser(login, password)
+    }
 }

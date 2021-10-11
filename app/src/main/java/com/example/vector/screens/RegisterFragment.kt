@@ -1,31 +1,22 @@
 package com.example.vector.screens
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
 import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_register.*
-import org.w3c.dom.Text
 
 class RegisterFragment: Fragment(R.layout.fragment_register)
 {
-    lateinit var sharedPreferences: SharedPreferences
     private lateinit var mUserViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +24,7 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
-
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
         view.findViewById<AppCompatButton>(R.id.registrationBtn).setOnClickListener {
             insertDataToDatabase()
         }
@@ -46,29 +35,21 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
         val email = emailEt.text.toString()
         val password = pwdFirstEt.text.toString()
         val passwordAgain = pwdSecondEt.text.toString()
-
-        if (inputCheck(login, email, password, passwordAgain)) {
+        val agree = agreeSwtch.isChecked
+        if (inputCheck(login, email, password, passwordAgain) && agree) {
             val user = User(0, login, email, password)
             mUserViewModel.addUser(user)
-            Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_LONG).show()
-            dataToStorage(login, email, password)
+            Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
         else {
-            Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_SHORT).show()
         }
     }
-
-    private fun dataToStorage(login: String, email: String, password: String) {
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString("USER_LOGIN", login)
-            putString("USER_EMAIL", email)
-            putString("USER_PASSWORD", password)
-        }.apply()
-    }
-
     private fun inputCheck(login: String, email: String, password: String, passwordAgain: String): Boolean {
-        return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || passwordAgain != password || !agreeSwtch.isActivated)
+        return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email)
+                || TextUtils.isEmpty(password) || passwordAgain != password
+                || !email.contains("@") || password.length < 6
+                || login.length < 5 || email.length < 5)
     }
 }
