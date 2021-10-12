@@ -24,6 +24,7 @@ Thumbs.db
                             
 # Android Studio
 *.iml
+/.idea
 .idea/codeStyles
 .idea/deploymentTargetDropDown.xml
 .idea/misc.xml
