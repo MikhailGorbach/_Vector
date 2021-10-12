@@ -15,8 +15,7 @@ import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
-class RegisterFragment: Fragment(R.layout.fragment_register)
-{
+class RegisterFragment : Fragment(R.layout.fragment_register) {
     private lateinit var mUserViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +29,7 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
         }
         return view
     }
+
     private fun insertDataToDatabase() {
         val login = loginEt.text.toString()
         val email = emailEt.text.toString()
@@ -41,12 +41,17 @@ class RegisterFragment: Fragment(R.layout.fragment_register)
             mUserViewModel.addUser(user)
             Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
-        else {
+        } else {
             Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun inputCheck(login: String, email: String, password: String, passwordAgain: String): Boolean {
+
+    private fun inputCheck(
+        login: String,
+        email: String,
+        password: String,
+        passwordAgain: String
+    ): Boolean {
         return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email)
                 || TextUtils.isEmpty(password) || passwordAgain != password
                 || !email.contains("@") || password.length < 6
