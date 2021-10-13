@@ -7,6 +7,6 @@ class UserRepository(private val userDao: UserDao) {
     }
 
     fun findUser(login: String, password: String): User? {
-        return userDao.findUser(login, password).value
+        return userDao.findUser(login, password)
     }
 }

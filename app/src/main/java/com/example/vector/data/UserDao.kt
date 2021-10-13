@@ -1,6 +1,5 @@
 package com.example.vector.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,5 +11,5 @@ interface UserDao {
     suspend fun addUser(user: User)
 
     @Query("SELECT * FROM user_table u WHERE u.login = :login AND u.password = :password")
-    fun findUser(login: String, password: String): LiveData<User>
+    fun findUser(login: String, password: String): User?
 }

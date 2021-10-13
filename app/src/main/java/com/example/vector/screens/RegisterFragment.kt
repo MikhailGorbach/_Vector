@@ -39,10 +39,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         if (inputCheck(login, email, password, passwordAgain) && agree) {
             val user = User(0, login, email, password)
             mUserViewModel.addUser(user)
-            Toast.makeText(activity, "Пользователь добавлен", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        } else {
-            Toast.makeText(activity, "Введите корректные данные", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -54,7 +51,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     ): Boolean {
         return !(TextUtils.isEmpty(login) || TextUtils.isEmpty(email)
                 || TextUtils.isEmpty(password) || passwordAgain != password
-                || !email.contains("@") || password.length < 6
+                || !email.contains("@") || password.length < 5
                 || login.length < 5 || email.length < 5)
     }
 }
