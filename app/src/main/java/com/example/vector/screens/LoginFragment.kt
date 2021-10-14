@@ -11,16 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.vector.MainActivity
 import com.example.vector.R
-import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_login.loginEdt
 import kotlinx.android.synthetic.main.fragment_login.pwdEdt
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var sharedPreferences: SharedPreferences
@@ -35,28 +33,25 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             startActivity(Intent(requireActivity(), MainActivity::class.java))
         } else {
             view.findViewById<Button>(R.id.enterBtn).setOnClickListener {
-                lifecycleScope.launch {
+                lifecycleScope.launch(Main) {
                     if (userDefined()) {
                         isLogined = true
                         saveSession(isLogined)
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
                     } else {
-                        view.findViewById<TextInputLayout>(R.id.loginTil).error = "Неправильный логин или пароль"
-                        view.findViewById<TextInputLayout>(R.id.pwdTil).error = "Неправильный логин или пароль"
+                        view.findViewById<TextInputLayout>(R.id.loginTil).error =
+                            "Неправильный логин или пароль"
                     }
                 }
             }
         }
     }
 
-    private suspend fun userDefined(): Boolean {
+    private suspend fun userDefined(): Boolean = withContext(IO) {
         val loginText = loginEdt.text.toString()
         val passwordText = pwdEdt.text.toString()
-        var user: User?
-        coroutineScope {
-            user = async(IO) { mUserViewModel.findUser(loginText, passwordText) }.await()
-        }
-        return user != null
+        val user = mUserViewModel.findUser(loginText, passwordText)
+        return@withContext user != null
     }
 
     private fun saveSession(isLogined: Boolean) {

@@ -42,8 +42,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun insertDataToDatabase() {
         if (inputCheck()) {
-            val user = User(
-                0,
+            val user = User(id,
                 binding.loginEt.text.toString(),
                 binding.emailEt.text.toString(),
                 binding.pwdFirstEt.text.toString()
