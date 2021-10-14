@@ -1,7 +1,6 @@
 package com.example.vector.screens
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,8 @@ import com.example.vector.R
 import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
 import com.example.vector.databinding.FragmentRegisterBinding
-import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.pwdFirstEt
+import kotlinx.android.synthetic.main.fragment_register.pwdSecondEt
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var _binding: FragmentRegisterBinding? = null
@@ -59,12 +59,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun passwordMatch(): Boolean {
         if (pwdFirstEt.text.toString() != pwdSecondEt.text.toString()) {
-            binding.pwdFirstTl.helperText = "Пароли не совпадают"
-            binding.pwdSecondTl.helperText = "Пароли не совпадают"
+            binding.pwdFirstTl.error = "Пароли не совпадают"
+            binding.pwdSecondTl.error = "Пароли не совпадают"
             return false
         }
-        binding.pwdFirstTl.helperText = ""
-        binding.pwdSecondTl.helperText = ""
+        binding.pwdFirstTl.error = null
+        binding.pwdSecondTl.error = null
         return true
     }
 
@@ -72,30 +72,30 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val login = binding.loginEt.text.toString()
         binding.pwdFirstTl.onFocusChangeListener
         if (login.length < 5) {
-            binding.loginTl.helperText = "Меньше 5 символов"
+            binding.loginTl.error = "Меньше 5 символов"
             return false
         }
-        binding.loginTl.helperText = ""
+        binding.loginTl.error = null
         return true
     }
 
     private fun emailCheck(): Boolean {
         val email = binding.emailEt.text.toString()
         if (email.length < 7 || !email.contains("@") || !(email.contains(".com") || email.contains(".ru"))) {
-            binding.emailTl.helperText = "Неправильный адрес"
+            binding.emailTl.error = "Неправильный адрес"
             return false
         }
-        binding.emailTl.helperText = ""
+        binding.emailTl.error = null
         return true
     }
 
     private fun passwordCheck(): Boolean {
         val password = binding.pwdFirstEt.text.toString()
         if (password.length < 6) {
-            binding.pwdFirstTl.helperText = "Меньше 6 символов"
+            binding.pwdFirstTl.error = "Меньше 6 символов"
             return false
         }
-        binding.pwdFirstTl.helperText = ""
+        binding.pwdFirstTl.error = null
         return true
     }
 }
