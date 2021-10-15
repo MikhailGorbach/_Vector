@@ -12,8 +12,6 @@ import com.example.vector.access.UserValid
 import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
 import com.example.vector.databinding.FragmentRegisterBinding
-import kotlinx.android.synthetic.main.fragment_register.pwdFirstEt
-import kotlinx.android.synthetic.main.fragment_register.pwdSecondEt
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var _binding: FragmentRegisterBinding? = null
@@ -55,4 +53,3 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 }
-
