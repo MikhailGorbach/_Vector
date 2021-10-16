@@ -44,9 +44,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         if (userVal.inputCheck()) {
             val user = User(
                 0,
-                binding.loginEt.text.toString(),
-                binding.emailEt.text.toString(),
-                binding.pwdFirstEt.text.toString()
+                binding.loginEt.text.toString().trim(),
+                binding.emailEt.text.toString().trim(),
+                binding.pwdFirstEt.text.toString().trim()
             )
             mUserViewModel.addUser(user)
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)

@@ -36,7 +36,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         } else {
             binding.enterBtn.setOnClickListener {
                 lifecycleScope.launch(Main) {
-                    if (userSession.userDefined(loginEdt.text.toString(), pwdEdt.text.toString())) {
+                    if (userSession.userDefined(loginEdt.text.toString().trim(), pwdEdt.text.toString().trim())) {
                         userSession.saveSession()
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
                     } else {
