@@ -9,17 +9,17 @@ import androidx.fragment.app.Fragment
 import com.example.vector.EnterActivity
 import com.example.vector.R
 import com.example.vector.access.UserSession
-import com.example.vector.databinding.FragmentMainBinding
+import com.example.vector.databinding.FragmentProfileBinding
 
-class MainFragment : Fragment(R.layout.fragment_main) {
-    private var _binding: FragmentMainBinding? = null
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 

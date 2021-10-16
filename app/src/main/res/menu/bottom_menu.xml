@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/secondFragment"
+        android:id="@+id/wayFragment"
         android:icon="@drawable/ic_explore_main"
-        android:title="Explore" />
+        android:title="Найти" />
     <item
-        android:id="@+id/thirdFragment"
+        android:id="@+id/mapFragment"
         android:icon="@drawable/ic_map_main"
-        android:title="Map" />
+        android:title="Карта" />
     <item
-        android:id="@+id/mainFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_account_main"
-        android:title="Profile" />
+        android:title="Профиль" />
 </menu>
