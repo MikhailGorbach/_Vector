@@ -11,7 +11,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/button_registr"
         android:text="@string/reg"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/loginBtn"
         app:layout_constraintTop_toTopOf="parent" />
