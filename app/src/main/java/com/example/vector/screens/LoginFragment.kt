@@ -47,8 +47,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     ) {
                         saveSession()
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    } else {
+                        binding.loginTil.error = "Неправильный логин или пароль"
                     }
-                    binding.loginTil.error = "Неправильный логин или пароль"
                 }
             }
         }
