@@ -27,10 +27,14 @@ class EnterActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeButtons(Btn1: AppCompatButton, Btn2: AppCompatButton, valid: Boolean) {
-        Btn1.isSelected = valid
-        Btn2.isSelected = valid
-        Btn1.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
-        Btn2.setTextColor(ContextCompat.getColor(applicationContext, R.color.blue))
+    private fun changeButtons(
+        notSelectedBtn: AppCompatButton,
+        selectedBtn: AppCompatButton,
+        valid: Boolean
+    ) {
+        notSelectedBtn.isSelected = valid
+        selectedBtn.isSelected = valid
+        notSelectedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
+        selectedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.blue))
     }
 }
