@@ -7,8 +7,10 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import com.example.vector.databinding.ActivityEnterBinding
 
-class EnterActivity : AppCompatActivity() {
+class AuntificationActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityEnterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEnterBinding.inflate(layoutInflater)

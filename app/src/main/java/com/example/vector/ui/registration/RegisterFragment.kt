@@ -1,4 +1,4 @@
-package com.example.vector.screens
+package com.example.vector.ui.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,45 +8,33 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
-import com.example.vector.data.User
-import com.example.vector.data.UserViewModel
 import com.example.vector.databinding.FragmentRegisterBinding
+import com.example.vector.domain.local.entity.UserDto
+import com.example.vector.ui.login.LoginViewModel
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
-    private var _binding: FragmentRegisterBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var mUserViewModel: UserViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private lateinit var binding: FragmentRegisterBinding
+    private lateinit var mLoginViewModel: LoginViewModel
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.registrationBtn.setOnClickListener {
             insertDataToDatabase()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+        return binding.root
     }
 
     private fun insertDataToDatabase() {
         if (inputCheck()) {
-            val user = User(login =
+            val user = UserDto(
+                login =
                 binding.loginEt.text.toString().trim(),
-                email =binding.emailEt.text.toString().trim(),
+                email = binding.emailEt.text.toString().trim(),
                 password = binding.pwdFirstEt.text.toString().trim()
             )
-            mUserViewModel.addUser(user)
+            mLoginViewModel.addUser(user)
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
@@ -75,16 +63,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun passwordMatch(): Boolean {
-        val pwdFirst = binding.pwdFirstEt.text.toString()
-        val pwdSecond = binding.pwdSecondEt.text.toString()
-        if (pwdFirst != pwdSecond) {
-            binding.pwdFirstTl.error = "Пароли не совпадают"
-            binding.pwdSecondTl.error = "Пароли не совпадают"
-            return false
+        with(binding) {
+            val pwdFirst = pwdFirstEt.text.toString()
+            val pwdSecond = pwdSecondEt.text.toString()
+            if (pwdFirst != pwdSecond) {
+                pwdFirstTl.error = "Пароли не совпадают"
+                pwdSecondTl.error = "Пароли не совпадают"
+                return false
+            }
+            pwdFirstTl.error = null
+            pwdSecondTl.error = null
+            return true
         }
-        binding.pwdFirstTl.error = null
-        binding.pwdSecondTl.error = null
-        return true
     }
 
     private fun passwordCheck(): Boolean {

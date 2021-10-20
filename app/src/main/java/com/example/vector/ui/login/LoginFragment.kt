@@ -1,4 +1,4 @@
-package com.example.vector.screens
+package com.example.vector.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.vector.MainActivity
 import com.example.vector.R
-import com.example.vector.data.UserViewModel
 import com.example.vector.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.loginEdt
 import kotlinx.android.synthetic.main.fragment_login.pwdEdt
@@ -22,18 +21,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var mUserViewModel: UserViewModel
+    private lateinit var mLoginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         if (isSignIn()) {
             startActivity(Intent(requireActivity(), MainActivity::class.java))
@@ -56,6 +55,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         return binding.root
     }
 
+    //Добавить проверку на существование пользователя с ошибкой - Пользователь не существует
+    // Добавить проверку несовпадения паролей
+
     private fun saveSession() {
         sharedPreferences.edit().putBoolean("USER_DEFINED", true).apply()
     }
@@ -68,7 +70,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private suspend fun userDefined(loginText: String, passwordText: String): Boolean =
         withContext(Dispatchers.IO) {
-            val user = mUserViewModel.findUser(loginText, passwordText)
+            val user = mLoginViewModel.findUser(loginText, passwordText)
             return@withContext user != null
         }
 }

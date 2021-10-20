@@ -1,11 +1,12 @@
-package com.example.vector.data
+package com.example.vector.domain.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.vector.domain.local.entity.UserDto
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [UserDto::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

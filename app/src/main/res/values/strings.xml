@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Vector</string>
-    <string name="registration">Зарегистрироваться</string>
-    <string name="agree">Согласен с правилами</string>
+
+    <!--RegistrationFragment-->
+    <string name="registration_button">Зарегистрироваться</string>
+    <string name="agree_text">Согласен с правилами</string>
+
+    <!--Переимновать-->
     <string name="reg">Регистрация</string>
     <string name="enter">Вход</string>
+
+    <!--BottomNavBar-->
+    <string name="menu_found">Найти</string>
+    <string name="menu_map">Карта</string>
+    <string name="menu_profile">Профиль</string>
 </resources>

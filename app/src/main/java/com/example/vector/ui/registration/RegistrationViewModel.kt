@@ -1,12 +1,14 @@
-package com.example.vector.data
+package com.example.vector.ui.registration
 
-import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vector.domain.UserRepository
+import com.example.vector.domain.local.UserDatabase
+import com.example.vector.domain.local.entity.UserDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UserViewModel(application: Application) : AndroidViewModel(application) {
+class RegistrationViewModel : AndroidViewModel(application) {
 
     private val repository: UserRepository
 
@@ -15,13 +17,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         repository = UserRepository(userDao)
     }
 
-    fun addUser(user: User) {
+    fun addUser(userDto: UserDto) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(user)
+            repository.addUser(userDto)
         }
-    }
-
-    fun findUser(login: String, password: String): User? {
-        return repository.findUser(login, password)
     }
 }
