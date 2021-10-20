@@ -4,6 +4,4 @@
     <string name="agree">Согласен с правилами</string>
     <string name="reg">Регистрация</string>
     <string name="enter">Вход</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

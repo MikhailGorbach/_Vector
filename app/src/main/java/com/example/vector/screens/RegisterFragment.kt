@@ -11,13 +11,12 @@ import com.example.vector.R
 import com.example.vector.data.User
 import com.example.vector.data.UserViewModel
 import com.example.vector.databinding.FragmentRegisterBinding
-import kotlinx.android.synthetic.main.fragment_register.pwdFirstEt
-import kotlinx.android.synthetic.main.fragment_register.pwdSecondEt
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private lateinit var mUserViewModel: UserViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,10 +41,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun insertDataToDatabase() {
         if (inputCheck()) {
-            val user = User(0,
-                binding.loginEt.text.toString(),
-                binding.emailEt.text.toString(),
-                binding.pwdFirstEt.text.toString()
+            val user = User(login =
+                binding.loginEt.text.toString().trim(),
+                email =binding.emailEt.text.toString().trim(),
+                password = binding.pwdFirstEt.text.toString().trim()
             )
             mUserViewModel.addUser(user)
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
@@ -53,24 +52,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun inputCheck(): Boolean {
-        return (loginCheck() && emailCheck() && passwordCheck() && passwordMatch() && binding.agreeSwtch.isChecked)
-    }
-
-    private fun passwordMatch(): Boolean {
-        if (pwdFirstEt.text.toString() != pwdSecondEt.text.toString()) {
-            binding.pwdFirstTl.error = "Пароли не совпадают"
-            binding.pwdSecondTl.error = "Пароли не совпадают"
-            return false
-        }
-        binding.pwdFirstTl.error = null
-        binding.pwdSecondTl.error = null
-        return true
+        return (loginCheck() && emailCheck() && passwordCheck() && passwordMatch() && agreeCheck())
     }
 
     private fun loginCheck(): Boolean {
-        val login = binding.loginEt.text.toString()
-        binding.pwdFirstTl.onFocusChangeListener
-        if (login.length < 5) {
+        if (binding.loginEt.text.toString().length < 5) {
             binding.loginTl.error = "Меньше 5 символов"
             return false
         }
@@ -88,14 +74,29 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         return true
     }
 
+    private fun passwordMatch(): Boolean {
+        val pwdFirst = binding.pwdFirstEt.text.toString()
+        val pwdSecond = binding.pwdSecondEt.text.toString()
+        if (pwdFirst != pwdSecond) {
+            binding.pwdFirstTl.error = "Пароли не совпадают"
+            binding.pwdSecondTl.error = "Пароли не совпадают"
+            return false
+        }
+        binding.pwdFirstTl.error = null
+        binding.pwdSecondTl.error = null
+        return true
+    }
+
     private fun passwordCheck(): Boolean {
-        val password = binding.pwdFirstEt.text.toString()
-        if (password.length < 6) {
+        if (binding.pwdFirstEt.text.toString().length < 6) {
             binding.pwdFirstTl.error = "Меньше 6 символов"
             return false
         }
         binding.pwdFirstTl.error = null
         return true
     }
-}
 
+    private fun agreeCheck(): Boolean {
+        return binding.agreeSwtch.isChecked
+    }
+}

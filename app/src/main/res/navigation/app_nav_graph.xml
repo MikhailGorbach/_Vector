@@ -3,10 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/mapFragment">
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.vector.screens.MainFragment"
-        android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        android:id="@+id/profileFragment"
+        android:name="com.example.vector.screens.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/wayFragment"
+        android:name="com.example.vector.screens.WayFragment"
+        android:label="Найти"
+        tools:layout="@layout/fragment_way" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.vector.screens.MapFragment"
+        android:label="Карта"
+        tools:layout="@layout/fragment_map" />
 </navigation>
