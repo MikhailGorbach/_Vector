@@ -7,7 +7,7 @@
     tools:context=".ui.MapFragment">
 
     <TextView
-        android:id="@+id/textViewMap"
+        android:id="@+id/mapTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"

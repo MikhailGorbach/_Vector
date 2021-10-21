@@ -38,18 +38,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         } else {
             binding.enterBtn.setOnClickListener {
                 lifecycleScope.launch(Main) {
-                    val user = findUser(binding.loginEdt.text.toString().trim())
-                    if (findUser(binding.loginEdt.text.toString()) == null) {
-                        binding.loginTextInputLayout.error = "Такого пользователя не существует"
-                        binding.pwdTextInputLayout.error = null
-                    } else if (user?.password != binding.pwdEdt.text.toString()) {
-                        binding.pwdTextInputLayout.error = "Неправильный пароль"
-                        binding.loginTextInputLayout.error = null
-                    } else if (user.login == binding.loginEdt.text.toString()
-                            .trim() && user.password == binding.pwdEdt.text.toString().trim()
-                    ) {
-                        saveSession()
-                        startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    with(binding) {
+                        val user = findUser(loginEdt.text.toString().trim())
+                        if (findUser(loginEdt.text.toString()) == null) {
+                            loginTextInputLayout.error = "Такого пользователя не существует"
+                            pwdTextInputLayout.error = null
+                        } else if (user?.password != pwdEdt.text.toString()) {
+                            pwdTextInputLayout.error = "Неправильный пароль"
+                            loginTextInputLayout.error = null
+                        } else if (user.login == loginEdt.text.toString()
+                                .trim() && user.password == pwdEdt.text.toString().trim()
+                        ) {
+                            saveSession()
+                            startActivity(Intent(requireActivity(), MainActivity::class.java))
+                        }
                     }
                 }
             }

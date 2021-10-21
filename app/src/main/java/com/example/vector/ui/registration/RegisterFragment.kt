@@ -9,8 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
 import com.example.vector.databinding.FragmentRegisterBinding
-import com.example.vector.domain.local.entity.UserDto
-import kotlinx.android.synthetic.main.fragment_login.loginTextInputLayout
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
@@ -28,14 +26,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun insertDataToDatabase() {
-        if (inputCheck()) {
-            val user = UserDto(
-                login = binding.loginEt.text.toString().trim(),
-                email = binding.emailEt.text.toString().trim(),
-                password = binding.pwdFirstEt.text.toString().trim()
-            )
-            mRegistrationViewModel.addUser(user)
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        with(binding) {
+            if (inputCheck()) {
+                mRegistrationViewModel.addUser(
+                    loginEt.text.toString(),
+                    emailEt.text.toString(),
+                    pwdFirstEt.text.toString()
+                )
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
     }
 
@@ -45,48 +44,52 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun loginCheck(): Boolean {
         with(binding) {
-            if (loginEt.text.toString().length < 5) {
+            return if (loginEt.text.toString().length < 5) {
                 loginRegTextInputLayout.error = "Меньше 5 символов"
-                return false
+                false
+            } else {
+                loginRegTextInputLayout.error = null
+                true
             }
-            loginRegTextInputLayout.error = null
-            return true
         }
     }
 
     private fun emailCheck(): Boolean {
         val email = binding.emailEt.text.toString()
-        if (email.length < 7 || !email.contains("@") || !(email.contains(".com") || email.contains(".ru"))) {
+        return if (email.length < 7 || !email.contains("@") || !(email.contains(".com") || email.contains(".ru"))) {
             binding.emailRegTextInputLayout.error = "Неправильный адрес"
-            return false
+            false
+        } else {
+            binding.emailRegTextInputLayout.error = null
+            true
         }
-        binding.emailRegTextInputLayout.error = null
-        return true
     }
 
     private fun passwordMatch(): Boolean {
         with(binding) {
             val pwdFirst = pwdFirstEt.text.toString()
             val pwdSecond = pwdSecondEt.text.toString()
-            if (pwdFirst != pwdSecond) {
+            return if (pwdFirst != pwdSecond) {
                 pwdFirstTextInputLayout.error = "Пароли не совпадают"
                 pwdSecondTextInputLayout.error = "Пароли не совпадают"
-                return false
+                false
+            } else {
+                pwdFirstTextInputLayout.error = null
+                pwdSecondTextInputLayout.error = null
+                true
             }
-            pwdFirstTextInputLayout.error = null
-            pwdSecondTextInputLayout.error = null
-            return true
         }
     }
 
     private fun passwordCheck(): Boolean {
         with(binding) {
-            if (pwdFirstEt.text.toString().length < 6) {
+            return if (pwdFirstEt.text.toString().length < 6) {
                 pwdFirstTextInputLayout.error = "Меньше 6 символов"
-                return false
+                false
+            } else {
+                pwdFirstTextInputLayout.error = null
+                true
             }
-            pwdFirstTextInputLayout.error = null
-            return true
         }
     }
 

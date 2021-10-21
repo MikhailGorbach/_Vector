@@ -1,6 +1,7 @@
 package com.example.vector.ui.registration
 
 import android.app.Application
+import android.provider.ContactsContract
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vector.domain.UserRepository
@@ -18,9 +19,9 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         repository = UserRepository(userDao)
     }
 
-    fun addUser(userDto: UserDto) {
+    fun addUser(login: String, email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(userDto)
+            repository.addUser(login, email, password)
         }
     }
 }
