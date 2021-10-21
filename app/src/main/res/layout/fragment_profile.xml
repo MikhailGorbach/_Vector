@@ -13,8 +13,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="100dp"
-        android:text="Welcome"
-        android:textSize="36dp"
+        android:text="@string/welcome"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +31,9 @@
         android:drawablePadding="5dp"
         android:paddingStart="10dp"
         android:paddingEnd="5dp"
-        android:text="Выйти"
+        android:text="@string/logout_Btn"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

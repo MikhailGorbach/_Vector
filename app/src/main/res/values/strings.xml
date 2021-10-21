@@ -23,4 +23,8 @@
     <string name="menu_map">Карта</string>
     <string name="menu_profile">Профиль</string>
 
+    <!--ProfileFragment-->
+    <string name="logout_Btn">Выйти</string>
+    <string name="welcome">Welcome</string>
+
 </resources>
