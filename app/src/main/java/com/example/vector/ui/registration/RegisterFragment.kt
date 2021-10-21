@@ -46,10 +46,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun loginCheck(): Boolean {
         with(binding) {
             if (loginEt.text.toString().length < 5) {
-                loginTextInputLayout.error = "Меньше 5 символов"
+                loginRegTextInputLayout.error = "Меньше 5 символов"
                 return false
             }
-            loginTextInputLayout.error = null
+            loginRegTextInputLayout.error = null
             return true
         }
     }

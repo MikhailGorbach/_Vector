@@ -5,10 +5,10 @@
     <string name="password_Edt">Пароль</string>
     <string name="login_Edt">Логин</string>
 
-    <!--LoginFragment-->
+    <!--Only LoginFragment-->
     <string name="enter_Btn">Войти</string>
 
-    <!--RegistrationFragment-->
+    <!--Only RegistrationFragment-->
     <string name="registration_Btn">Зарегистрироваться</string>
     <string name="agree_switch">Согласен с правилами</string>
     <string name="repeatPassword_Edt">Повторить пароль</string>

@@ -59,6 +59,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun saveSession() {
         sharedPreferences.edit().putBoolean("USER_DEFINED", true).apply()
+        sharedPreferences.edit().putString("USER_LOGIN", binding.loginEdt.text.toString()).apply()
     }
 
     private fun isSignIn(): Boolean {

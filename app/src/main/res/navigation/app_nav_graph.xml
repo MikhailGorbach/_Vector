@@ -6,7 +6,7 @@
     app:startDestination="@id/mapFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.vector.ui.ProfileFragment"
+        android:name="com.example.vector.ui.profile.ProfileFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
     <fragment

@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    tools:context="com.example.vector.ui.ProfileFragment">
-
-    <!--Основоная информация о пользователе-->
+    tools:context="com.example.vector.ui.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/welcomeTextView"
