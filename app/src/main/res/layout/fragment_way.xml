@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.WayFragment">
+    tools:context=".ui.WayFragment">
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/wayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="200dp"
-        android:text="WayFragment"
+        android:text="@string/wayfragment"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

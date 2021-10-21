@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginTl"
+        android:id="@+id/loginRegTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,19 +30,17 @@
             android:id="@+id/loginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_person_ic"
-            android:hint="Логин"
+            android:drawableStart="@drawable/background_selector_person_ic"
+            android:hint="@string/login_edt"
             android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
             android:minHeight="48dp"
             android:textSize="16sp" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailTl"
+        android:id="@+id/emailRegTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,14 +58,14 @@
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTl">
+        app:layout_constraintTop_toBottomOf="@+id/loginRegTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_email_ic"
-            android:hint="Email"
+            android:drawableStart="@drawable/background_selector_email_ic"
+            android:hint="@string/email_edt"
             android:inputType="textEmailAddress"
             android:maxLength="30"
             android:maxLines="1"
@@ -77,7 +74,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwdFirstTl"
+        android:id="@+id/pwdFirstTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,7 +91,7 @@
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailTl"
+        app:layout_constraintTop_toBottomOf="@+id/emailRegTextInputLayout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/blue">
 
@@ -102,8 +99,8 @@
             android:id="@+id/pwdFirstEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_lock_ic"
-            android:hint="Пароль"
+            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:hint="@string/password_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
@@ -112,7 +109,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwdSecondTl"
+        android:id="@+id/pwdSecondTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -129,7 +126,7 @@
         app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwdFirstTl"
+        app:layout_constraintTop_toBottomOf="@+id/pwdFirstTextInputLayout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/blue">
 
@@ -137,8 +134,8 @@
             android:id="@+id/pwdSecondEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_lock_ic"
-            android:hint="Повторить пароль"
+            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:hint="@string/repeatPassword_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
@@ -154,13 +151,12 @@
         android:layout_marginEnd="25dp"
         android:minHeight="48dp"
         android:switchPadding="145dp"
-        android:text="@string/agree"
+        android:text="@string/agree_switch"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwdSecondTl"
+        app:layout_constraintTop_toBottomOf="@+id/pwdSecondTextInputLayout"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registrationBtn"
@@ -168,8 +164,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:background="@drawable/rounded_button_transparent"
-        android:text="@string/registration"
+        android:background="@drawable/background_registrationbtn"
+        android:text="@string/registration_btn"
         android:textColor="@color/blue"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

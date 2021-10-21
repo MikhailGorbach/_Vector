@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/wayFragment"
-        android:icon="@drawable/ic_explore_main"
-        android:title="Найти" />
+        android:icon="@drawable/menu_explore_ic"
+        android:title="@string/menu_found" />
     <item
         android:id="@+id/mapFragment"
-        android:icon="@drawable/ic_map_main"
-        android:title="Карта" />
+        android:icon="@drawable/menu_map_ic"
+        android:title="@string/menu_map" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_account_main"
-        android:title="Профиль" />
+        android:icon="@drawable/menu_account_ic"
+        android:title="@string/menu_profile" />
 </menu>

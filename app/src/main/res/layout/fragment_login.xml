@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vector.screens.LoginFragment">
-
+    tools:context="com.example.vector.ui.login.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginTil"
+        android:id="@+id/loginTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,14 +30,14 @@
             android:id="@+id/loginEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_person_ic"
-            android:hint="Логин"
+            android:drawableStart="@drawable/background_selector_person_ic"
+            android:hint="@string/login_edt"
             android:maxLength="20"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwdTil"
+        android:id="@+id/pwdTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +49,7 @@
         app:boxCornerRadiusTopStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTil"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextInputLayout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/blue">
 
@@ -58,8 +57,8 @@
             android:id="@+id/pwdEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/custom_lock_ic"
-            android:hint="Пароль"
+            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:hint="@string/password_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
@@ -74,12 +73,12 @@
         android:layout_marginLeft="120dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="120dp"
-        android:background="@drawable/button_enter"
-        android:text="Войти"
+        android:background="@drawable/background_selector_button_enter"
+        android:text="@string/enter_btn"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwdTil" />
+        app:layout_constraintTop_toBottomOf="@+id/pwdTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

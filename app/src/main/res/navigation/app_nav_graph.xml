@@ -6,17 +6,17 @@
     app:startDestination="@id/mapFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.vector.screens.ProfileFragment"
+        android:name="com.example.vector.ui.profile.ProfileFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/wayFragment"
-        android:name="com.example.vector.screens.WayFragment"
+        android:name="com.example.vector.ui.WayFragment"
         android:label="Найти"
         tools:layout="@layout/fragment_way" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.vector.screens.MapFragment"
+        android:name="com.example.vector.ui.MapFragment"
         android:label="Карта"
         tools:layout="@layout/fragment_map" />
 </navigation>
