@@ -8,9 +8,9 @@ import com.example.vector.domain.local.entity.UserDto
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(userDto: UserDto)
 
     @Query("SELECT * FROM user_table u WHERE u.login = :login")
-    fun findUser(login: String, password: String): UserDto?
+    fun findUser(login: String): UserDto?
 }

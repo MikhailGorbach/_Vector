@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Vector</string>
 
-    <!--RegistrationFragment-->
-    <string name="registration_button">Зарегистрироваться</string>
-    <string name="agree_text">Согласен с правилами</string>
+    <!--Login and Registration Fragment-->
+    <string name="password_Edt">Пароль</string>
+    <string name="login_Edt">Логин</string>
 
-    <!--Переимновать-->
-    <string name="reg">Регистрация</string>
-    <string name="enter">Вход</string>
+    <!--LoginFragment-->
+    <string name="enter_Btn">Войти</string>
+
+    <!--RegistrationFragment-->
+    <string name="registration_Btn">Зарегистрироваться</string>
+    <string name="agree_switch">Согласен с правилами</string>
+    <string name="repeatPassword_Edt">Повторить пароль</string>
+    <string name="email_Edt">Email</string>
+
+    <!--AuthentificationActivity-->
+    <string name="registr_Btn">Регистрация</string>
+    <string name="login_Btn">Вход</string>
 
     <!--BottomNavBar-->
     <string name="menu_found">Найти</string>
     <string name="menu_map">Карта</string>
     <string name="menu_profile">Профиль</string>
+
 </resources>

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.vector.AuntificationActivity
+import com.example.vector.AuthentificationActivity
 import com.example.vector.R
 import com.example.vector.databinding.FragmentProfileBinding
 
@@ -21,7 +21,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.logOutBtn.setOnClickListener {
             signOut()
-            startActivity(Intent(requireActivity(), AuntificationActivity::class.java))
+            startActivity(Intent(requireActivity(), AuthentificationActivity::class.java))
         }
         return binding.root
     }

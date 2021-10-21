@@ -5,15 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import com.example.vector.databinding.ActivityEnterBinding
+import com.example.vector.databinding.ActivityAuthentificationBinding
 
-class AuntificationActivity : AppCompatActivity() {
+class AuthentificationActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityEnterBinding
+    private lateinit var binding: ActivityAuthentificationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEnterBinding.inflate(layoutInflater)
+        binding = ActivityAuthentificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.registrBtn.setOnClickListener {
             changeButtons(binding.registrBtn, binding.loginBtn, true)
@@ -29,11 +29,7 @@ class AuntificationActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeButtons(
-        notSelectedBtn: AppCompatButton,
-        selectedBtn: AppCompatButton,
-        valid: Boolean
-    ) {
+    private fun changeButtons(notSelectedBtn: AppCompatButton, selectedBtn: AppCompatButton, valid: Boolean) {
         notSelectedBtn.isSelected = valid
         selectedBtn.isSelected = valid
         notSelectedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))

@@ -6,10 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.WayFragment">
 
-    <!--Переисеновать ид-->
-
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/textViewWay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
@@ -22,4 +20,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

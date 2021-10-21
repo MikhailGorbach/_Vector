@@ -10,16 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.vector.R
 import com.example.vector.databinding.FragmentRegisterBinding
 import com.example.vector.domain.local.entity.UserDto
-import com.example.vector.ui.login.LoginViewModel
+import kotlinx.android.synthetic.main.fragment_login.loginTextInputLayout
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var mLoginViewModel: LoginViewModel
+    private lateinit var mRegistrationViewModel: RegistrationViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        mRegistrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
         binding.registrationBtn.setOnClickListener {
             insertDataToDatabase()
         }
@@ -29,12 +30,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun insertDataToDatabase() {
         if (inputCheck()) {
             val user = UserDto(
-                login =
-                binding.loginEt.text.toString().trim(),
+                login = binding.loginEt.text.toString().trim(),
                 email = binding.emailEt.text.toString().trim(),
                 password = binding.pwdFirstEt.text.toString().trim()
             )
-            mLoginViewModel.addUser(user)
+            mRegistrationViewModel.addUser(user)
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
@@ -44,21 +44,23 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun loginCheck(): Boolean {
-        if (binding.loginEt.text.toString().length < 5) {
-            binding.loginTl.error = "Меньше 5 символов"
-            return false
+        with(binding) {
+            if (loginEt.text.toString().length < 5) {
+                loginTextInputLayout.error = "Меньше 5 символов"
+                return false
+            }
+            loginTextInputLayout.error = null
+            return true
         }
-        binding.loginTl.error = null
-        return true
     }
 
     private fun emailCheck(): Boolean {
         val email = binding.emailEt.text.toString()
         if (email.length < 7 || !email.contains("@") || !(email.contains(".com") || email.contains(".ru"))) {
-            binding.emailTl.error = "Неправильный адрес"
+            binding.emailRegTextInputLayout.error = "Неправильный адрес"
             return false
         }
-        binding.emailTl.error = null
+        binding.emailRegTextInputLayout.error = null
         return true
     }
 
@@ -67,23 +69,25 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val pwdFirst = pwdFirstEt.text.toString()
             val pwdSecond = pwdSecondEt.text.toString()
             if (pwdFirst != pwdSecond) {
-                pwdFirstTl.error = "Пароли не совпадают"
-                pwdSecondTl.error = "Пароли не совпадают"
+                pwdFirstTextInputLayout.error = "Пароли не совпадают"
+                pwdSecondTextInputLayout.error = "Пароли не совпадают"
                 return false
             }
-            pwdFirstTl.error = null
-            pwdSecondTl.error = null
+            pwdFirstTextInputLayout.error = null
+            pwdSecondTextInputLayout.error = null
             return true
         }
     }
 
     private fun passwordCheck(): Boolean {
-        if (binding.pwdFirstEt.text.toString().length < 6) {
-            binding.pwdFirstTl.error = "Меньше 6 символов"
-            return false
+        with(binding) {
+            if (pwdFirstEt.text.toString().length < 6) {
+                pwdFirstTextInputLayout.error = "Меньше 6 символов"
+                return false
+            }
+            pwdFirstTextInputLayout.error = null
+            return true
         }
-        binding.pwdFirstTl.error = null
-        return true
     }
 
     private fun agreeCheck(): Boolean {

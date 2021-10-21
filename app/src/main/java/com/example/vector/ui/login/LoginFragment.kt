@@ -13,8 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.vector.MainActivity
 import com.example.vector.R
 import com.example.vector.databinding.FragmentLoginBinding
-import kotlinx.android.synthetic.main.fragment_login.loginEdt
-import kotlinx.android.synthetic.main.fragment_login.pwdEdt
+import com.example.vector.domain.local.entity.UserDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -39,24 +38,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         } else {
             binding.enterBtn.setOnClickListener {
                 lifecycleScope.launch(Main) {
-                    if (userDefined(
-                            loginEdt.text.toString().trim(),
-                            pwdEdt.text.toString().trim()
-                        )
+                    val user = findUser(binding.loginEdt.text.toString().trim())
+                    if (findUser(binding.loginEdt.text.toString()) == null) {
+                        binding.loginTextInputLayout.error = "Такого пользователя не существует"
+                        binding.pwdTextInputLayout.error = null
+                    } else if (user?.password != binding.pwdEdt.text.toString()) {
+                        binding.pwdTextInputLayout.error = "Неправильный пароль"
+                        binding.loginTextInputLayout.error = null
+                    } else if (user.login == binding.loginEdt.text.toString()
+                            .trim() && user.password == binding.pwdEdt.text.toString().trim()
                     ) {
                         saveSession()
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
-                    } else {
-                        binding.loginTil.error = "Неправильный логин или пароль"
                     }
                 }
             }
         }
         return binding.root
     }
-
-    //Добавить проверку на существование пользователя с ошибкой - Пользователь не существует
-    // Добавить проверку несовпадения паролей
 
     private fun saveSession() {
         sharedPreferences.edit().putBoolean("USER_DEFINED", true).apply()
@@ -68,9 +67,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         return sharedPreferences.getBoolean("USER_DEFINED", false)
     }
 
-    private suspend fun userDefined(loginText: String, passwordText: String): Boolean =
+    private suspend fun findUser(loginText: String): UserDto? =
         withContext(Dispatchers.IO) {
-            val user = mLoginViewModel.findUser(loginText, passwordText)
-            return@withContext user != null
+            return@withContext mLoginViewModel.findUser(loginText)
         }
 }

@@ -15,7 +15,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         repository = UserRepository(userDao)
     }
 
-    fun findUser(login: String, password: String): UserDto? {
-        return repository.findUser(login, password)
+    fun findUser(login: String): UserDto? {
+        return repository.findUser(login)
     }
 }
