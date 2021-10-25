@@ -1,6 +1,9 @@
 package com.example.vector.ui.profile
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -13,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.vector.AuthentificationActivity
 import com.example.vector.R
 import com.example.vector.databinding.FragmentProfileBinding
+import kotlinx.android.synthetic.main.fragment_profile.welcomeTextView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -34,6 +38,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             signOut()
             startActivity(Intent(requireActivity(), AuthentificationActivity::class.java))
         }
+        binding.copyBtn.setOnClickListener {
+            val clipboard = requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("TextView", welcomeTextView.text.toString())
+            clipboard.setPrimaryClip(clip)
+        }
         return binding.root
     }
 
@@ -42,7 +51,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             sharedPreferences = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
             val userLogin = sharedPreferences.getString("USER_LOGIN", null)
             val user = mProfileViewModel.findUser(userLogin)
-            return@withContext "Welcome ${user?.login}\n${user?.email}\n${user?.password}"
+            return@withContext "Добро пожаловать, ${user?.login}!\nПочта: ${user?.email}\nПароль: ${user?.password}"
         }
 
     private fun signOut() {
