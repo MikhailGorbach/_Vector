@@ -16,12 +16,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
+    private var markers: MutableList<Marker> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -38,10 +40,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 if (location != "") {
                     val geocoder = Geocoder(requireContext())
                     try {
-                        var addressList: List<Address> = geocoder.getFromLocationName(location, 1)
-                        while (addressList.isEmpty()) {
-                            addressList = geocoder.getFromLocationName(location, 1)
-                        }
+                        val addressList: List<Address> = geocoder.getFromLocationName(location, 1)
                         if (addressList.isNotEmpty()) {
                             val address = addressList[0]
                             val latLng = LatLng(address.latitude, address.longitude)
@@ -65,12 +64,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
         map?.uiSettings?.isZoomControlsEnabled = true
         setUpMap()
+        mMap.setOnMapLongClickListener {
+            latlng -> val marker = mMap.addMarker(MarkerOptions().position(latlng).title("$latlng"))
+            if (marker != null) {
+                markers.add(marker)
+            }
+        }
+        mMap.setOnInfoWindowClickListener {
+            markerToDelete -> markers.remove(markerToDelete)
+            markerToDelete.remove()
+        }
     }
 
     private fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+            != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
     }
@@ -78,6 +86,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private fun placeMarker(currentLatLong: LatLng) {
         val markerOptions = MarkerOptions().position(currentLatLong)
         markerOptions.title("$currentLatLong")
-        mMap.addMarker(markerOptions)
+        val marker = mMap.addMarker(markerOptions)
+        if (marker != null) {
+            markers.add(marker)
+        }
     }
 }
