@@ -8,5 +8,5 @@ import com.example.vector.domain.local.entity.MarkDto
 @Dao
 interface MarkDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addPlace(markDto: MarkDto)
+    suspend fun addMark(markDto: MarkDto)
 }
