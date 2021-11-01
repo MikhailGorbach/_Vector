@@ -6,16 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.MapFragment">
 
-    <TextView
-        android:id="@+id/mapTextView"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="200dp"
-        android:text="MapFragment"
-        android:textSize="16sp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_rounded_searchview"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@color/transparent"
+        app:queryHint="Поиск" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

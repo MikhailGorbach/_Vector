@@ -7,15 +7,16 @@ import androidx.room.RoomDatabase
 import com.example.vector.domain.local.entity.UserDto
 
 @Database(entities = [UserDto::class], version = 1, exportSchema = false)
-abstract class UserDatabase : RoomDatabase() {
+abstract class DataBase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun markDao(): MarkDao
 
     companion object {
         @Volatile
-        private var INSTANCE: UserDatabase? = null
+        private var INSTANCE: DataBase? = null
 
-        fun getDatabase(context: Context): UserDatabase {
+        fun getDatabase(context: Context): DataBase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -23,7 +24,7 @@ abstract class UserDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    UserDatabase::class.java,
+                    DataBase::class.java,
                     "user_database"
                 ).build()
                 INSTANCE = instance
