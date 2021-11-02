@@ -1,9 +1,9 @@
-package com.example.vector.ui
+package com.example.vector.ui.mark
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vector.domain.MarkRepository
+import com.example.vector.domain.repositories.MarkRepository
 import com.example.vector.domain.local.DataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

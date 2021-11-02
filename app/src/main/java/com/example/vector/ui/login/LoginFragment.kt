@@ -31,7 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        mLoginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         if (isSignIn()) {
             startActivity(Intent(requireActivity(), MainActivity::class.java))

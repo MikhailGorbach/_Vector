@@ -1,4 +1,4 @@
-package com.example.vector.domain
+package com.example.vector.domain.repositories
 
 import com.example.vector.domain.local.MarkDao
 import com.example.vector.domain.local.entity.MarkDto

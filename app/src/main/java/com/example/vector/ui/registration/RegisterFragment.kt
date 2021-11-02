@@ -18,7 +18,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        mRegistrationViewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+        mRegistrationViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
         binding.registrationBtn.setOnClickListener {
             insertDataToDatabase()
         }

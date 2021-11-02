@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -58,16 +60,18 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onMapReady(map: GoogleMap?) {
-        if (map != null) {
-            mMap = map
-        }
-        map?.uiSettings?.isZoomControlsEnabled = true
+    override fun onMapReady(map: GoogleMap) {
+        mMap = map
+        map.uiSettings.isZoomControlsEnabled = true
         setUpMap()
-        mMap.setOnMapLongClickListener {
-            latlng -> val marker = mMap.addMarker(MarkerOptions().position(latlng).title("$latlng"))
+        mMap.setOnMapLongClickListener { latlng ->
+            val marker = mMap.addMarker(MarkerOptions().position(latlng).title("$latlng"))
             if (marker != null) {
                 markers.add(marker)
+                val action = MapFragmentDirections.actionMapFragmentToMarkFragment(latlng.latitude.toString(), latlng.longitude.toString())
+                if (findNavController().currentDestination?.id != R.id.markFragment) {
+                    findNavController().navigate(action)
+                }
             }
         }
         mMap.setOnInfoWindowClickListener {

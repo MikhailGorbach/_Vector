@@ -18,5 +18,24 @@
         android:id="@+id/mapFragment"
         android:name="com.example.vector.ui.MapFragment"
         android:label="Карта"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_markFragment"
+            app:destination="@id/markFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/markFragment"
+        android:name="com.example.vector.ui.mark.MarkFragment"
+        android:label="Заполнение данных"
+        tools:layout="@layout/fragment_mark" >
+        <action
+            android:id="@+id/action_markFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+    </fragment>
 </navigation>

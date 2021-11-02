@@ -30,7 +30,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        mProfileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        mProfileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         lifecycleScope.launch(Main) {
             binding.welcomeTextView.text = userInformation()
         }

@@ -2,7 +2,7 @@ package com.example.vector.ui.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.vector.domain.UserRepository
+import com.example.vector.domain.repositories.UserRepository
 import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.local.entity.UserDto
 
