@@ -25,11 +25,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mLoginViewModel: LoginViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         mLoginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
