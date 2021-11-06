@@ -1,14 +1,14 @@
-package com.example.vector.ui.mark
+package com.example.vector.ui.map
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vector.domain.repositories.MarkRepository
 import com.example.vector.domain.local.DataBase
+import com.example.vector.domain.repositories.MarkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MarkViewModel(application: Application) : AndroidViewModel(application) {
+class MapViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: MarkRepository
 
@@ -20,6 +20,12 @@ class MarkViewModel(application: Application) : AndroidViewModel(application) {
     fun addMark(title: String, description: String, longitude: String, latitude: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addMark(title, description, longitude, latitude)
+        }
+    }
+
+    fun deleteMark(id: Int, title: String?, description: String?, longitude: String?, latitude: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteMark(id, title, description, longitude, latitude)
         }
     }
 }
