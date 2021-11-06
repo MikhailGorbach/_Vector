@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vector.domain.local.DataBase
+import com.example.vector.domain.local.entity.MarkDto
 import com.example.vector.domain.repositories.MarkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,9 +24,13 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteMark(id: Int, title: String?, description: String?, longitude: String?, latitude: String?) {
+    fun deleteMark(markDto: MarkDto) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteMark(id, title, description, longitude, latitude)
+            repository.deleteMark(markDto)
         }
+    }
+
+    fun findMarker(longitude: String, latitude: String): MarkDto? {
+        return repository.findMarker(longitude, latitude)
     }
 }

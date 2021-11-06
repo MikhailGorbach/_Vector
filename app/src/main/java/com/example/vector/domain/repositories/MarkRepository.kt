@@ -10,10 +10,11 @@ class MarkRepository(private val markDao: MarkDao) {
         markDao.addMark(mark)
     }
 
-    suspend fun deleteMark(id: Int, title: String?, description: String?, longitude: String?, latitude: String?) {
-        if (title != null && description != null && longitude != null && latitude != null) {
-            val mark = MarkDto(id = id, title = title, description = description, longitude = longitude, latitude = latitude)
-            markDao.deleteMark(mark)
-        }
+    suspend fun deleteMark(markDto: MarkDto) {
+        markDao.deleteMark(markDto)
+    }
+
+    fun findMarker(longitude: String, latitude: String): MarkDto? {
+        return markDao.findMarker(longitude, latitude)
     }
 }

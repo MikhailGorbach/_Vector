@@ -14,23 +14,27 @@ import android.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
+import com.example.vector.domain.local.entity.MarkDto
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
     private lateinit var mMapViewModel: MapViewModel
-    private var markers: MutableList<Marker> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -86,11 +90,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val titleTextInputLayout = placeFromView.findViewById<TextInputLayout>(R.id.titleTextInputLayout)
                 val descriptionTextInputLayout = placeFromView.findViewById<TextInputLayout>(R.id.descriptionTextInputLayout)
                 if (inputCheck(title, description, titleTextInputLayout, descriptionTextInputLayout)) {
-                    val marker = mMap.addMarker(MarkerOptions().position(latlng).title(title).snippet(description))
-                    if (marker != null) {
-                        markers.add(marker)
-                        mMapViewModel.addMark(title, description, latlng.longitude.toString().trim(), latlng.latitude.toString().trim())
-                    }
+                    mMap.addMarker(MarkerOptions().position(latlng).title(title).snippet(description))
+                    mMapViewModel.addMark(title, description, latlng.longitude.toString().trim(), latlng.latitude.toString().trim())
                     dialog.dismiss()
                 } else {
                     return@setOnClickListener
@@ -98,14 +99,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             }
         }
         mMap.setOnInfoWindowClickListener { markerToDelete ->
-            val markerLatitude = markerToDelete.position.latitude.toString().trim()
-            val markerLongitude = markerToDelete.position.longitude.toString().trim()
-            val markerDescription = markerToDelete.snippet?.trim()
-            val markerTitle = markerToDelete.title?.trim()
-            val id = markers.indexOf(markerToDelete) + 1
-            mMapViewModel.deleteMark(id, markerTitle, markerDescription, markerLongitude, markerLatitude)
-            markers.remove(markerToDelete)
-            markerToDelete.remove()
+            val latitude = markerToDelete.position.latitude.toString().trim()
+            val longitude = markerToDelete.position.longitude.toString().trim()
+            lifecycleScope.launch(Main) {
+                val mark = findMarker(longitude, latitude)
+                if (mark != null) {
+                    mMapViewModel.deleteMark(mark)
+                    markerToDelete.remove()
+                }
+            }
         }
     }
 
@@ -133,6 +135,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+
+    private suspend fun findMarker(longitude: String, latitude: String): MarkDto? =
+        withContext(Dispatchers.IO) {
+            return@withContext mMapViewModel.findMarker(longitude, latitude)
+        }
 
     private fun setUpPermission() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
