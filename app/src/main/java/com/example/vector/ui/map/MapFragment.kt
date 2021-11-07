@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,6 +37,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMapViewModel: MapViewModel
     private var markers = mutableListOf<MarkDto>()
 
+    companion object {
+        const val mapScale = 12f
+        const val onlyOneAddress = 1
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
 
@@ -59,14 +63,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val location = binding.searchView.query.toString()
-                if (location != "") {
-                    val geocoder = Geocoder(requireContext())
+                if (location.isNotBlank()) {
                     try {
-                        val addressList: List<Address> = geocoder.getFromLocationName(location, 1)
-                        if (addressList.isNotEmpty()) {
-                            val address = addressList[0]
+                        val address = Geocoder(requireContext()).getFromLocationName(location, onlyOneAddress)[0]
+                        if (address != null) {
                             val latLng = LatLng(address.latitude, address.longitude)
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, mapScale))
                         }
                     } catch (e: Exception) {
                         println(e)
@@ -85,33 +87,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         setUpPermission()
         lifecycleScope.launch(Main) {
             markers.forEach {
-                val marker = it
-                val latlng = LatLng(marker.latitude.toDouble(), marker.longitude.toDouble())
-                mMap.addMarker(MarkerOptions().position(latlng).title(marker.title).snippet(marker.description))
+                val latLng = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
+                mMap.addMarker(MarkerOptions().position(latLng).title(it.title).snippet(it.description))
             }
         }
-        mMap.setOnMapLongClickListener { latlng ->
-            val placeFromView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_mark, null)
-            val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Создать маркер")
-                .setPositiveButton("Создать", null)
-                .setNegativeButton("Отмена", null)
-                .setView(placeFromView)
-                .show()
+        mMap.setOnMapLongClickListener { currentLatLng ->
+            val viewFromFragmentMark = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_mark, null)
+            val dialog = createAlertDialog(viewFromFragmentMark)
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                val title = placeFromView.findViewById<TextInputEditText>(R.id.titleTextInputEditText).text.toString().trim()
-                val description = placeFromView.findViewById<TextInputEditText>(R.id.descriptionTextInputEditText).text.toString().trim()
-                val titleTextInputLayout = placeFromView.findViewById<TextInputLayout>(R.id.titleTextInputLayout)
-                val descriptionTextInputLayout = placeFromView.findViewById<TextInputLayout>(R.id.descriptionTextInputLayout)
-                if (inputCheck(title, description, titleTextInputLayout, descriptionTextInputLayout)) {
-                    mMap.addMarker(MarkerOptions().position(latlng).title(title).snippet(description))
-                    mMapViewModel.addMark(title, description, latlng.longitude.toString(), latlng.latitude.toString())
-                    lifecycleScope.launch(Main) {
-                        val mark = findMarker(latlng.longitude.toString(), latlng.latitude.toString())
-                        if (mark != null) {
-                            markers.add(mark)
-                        }
-                    }
+                if (inputCheck(viewFromFragmentMark)) {
+                    addMarker(currentLatLng, viewFromFragmentMark)
                     dialog.dismiss()
                 } else {
                     return@setOnClickListener
@@ -123,21 +108,38 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val longitude = markerToDelete.position.longitude.toString()
             lifecycleScope.launch(Main) {
                 val mark = findMarker(longitude, latitude)
-                if (mark != null) {
-                    markers.remove(mark)
-                    markerToDelete.remove()
-                    mMapViewModel.deleteMark(mark)
-                }
+                markers.remove(mark)
+                markerToDelete.remove()
+                mMapViewModel.deleteMark(mark!!)
             }
         }
     }
 
-    private fun inputCheck(
-        title: String,
-        description: String,
-        titleTextInputLayout: TextInputLayout,
-        descriptionTextInputLayout: TextInputLayout
-    ): Boolean {
+    private fun addMarker(latLng: LatLng, viewFromFragmentMark: View) {
+        val title = viewFromFragmentMark.findViewById<TextInputEditText>(R.id.titleTextInputEditText).text.toString().trim()
+        val description = viewFromFragmentMark.findViewById<TextInputEditText>(R.id.descriptionTextInputEditText).text.toString().trim()
+        mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
+        mMapViewModel.addMark(title, description, latLng.longitude.toString(), latLng.latitude.toString())
+        lifecycleScope.launch(Main) {
+            val mark = findMarker(latLng.longitude.toString(), latLng.latitude.toString())
+            markers.add(mark!!)
+        }
+    }
+
+    private fun createAlertDialog(viewFromFragmentMark: View): AlertDialog {
+        return AlertDialog.Builder(requireContext())
+            .setTitle("Создать маркер")
+            .setPositiveButton("Создать", null)
+            .setNegativeButton("Отмена", null)
+            .setView(viewFromFragmentMark)
+            .show()
+    }
+
+    private fun inputCheck(viewFromFragmentMark: View): Boolean {
+        val title = viewFromFragmentMark.findViewById<TextInputEditText>(R.id.titleTextInputEditText).text.toString().trim()
+        val description = viewFromFragmentMark.findViewById<TextInputEditText>(R.id.descriptionTextInputEditText).text.toString().trim()
+        val titleTextInputLayout = viewFromFragmentMark.findViewById<TextInputLayout>(R.id.titleTextInputLayout)
+        val descriptionTextInputLayout = viewFromFragmentMark.findViewById<TextInputLayout>(R.id.descriptionTextInputLayout)
         return when {
             title.isEmpty() -> {
                 descriptionTextInputLayout.error = null
