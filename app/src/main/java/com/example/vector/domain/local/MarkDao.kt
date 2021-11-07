@@ -1,5 +1,6 @@
 package com.example.vector.domain.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,4 +20,7 @@ interface MarkDao {
 
     @Query("SELECT * FROM place_table m WHERE m.longitude = :longitude AND m.latitude = :latitude")
     fun findMarker(longitude: String, latitude: String): MarkDto?
+
+    @Query("SELECT * FROM place_table ORDER BY id ASC")
+    fun readAllMarkers(): LiveData<List<MarkDto>>
 }
