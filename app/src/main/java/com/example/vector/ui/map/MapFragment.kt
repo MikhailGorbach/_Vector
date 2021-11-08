@@ -165,10 +165,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
 
     private fun setUpPermission() {
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (permissionNotGranted()) {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
+    }
+
+    private fun permissionNotGranted(): Boolean {
+        return (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED)
     }
 }
