@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/wayFragment"
-        android:name="com.example.vector.ui.WayFragment"
+        android:name="com.example.vector.ui.way.WayFragment"
         android:label="Найти"
         tools:layout="@layout/fragment_way" />
     <fragment
