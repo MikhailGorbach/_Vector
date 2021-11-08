@@ -12,11 +12,24 @@
     <fragment
         android:id="@+id/wayFragment"
         android:name="com.example.vector.ui.way.WayFragment"
-        android:label="Найти"
-        tools:layout="@layout/fragment_way" />
+        android:label="Ваши метки"
+        tools:layout="@layout/fragment_way">
+        <action
+            android:id="@+id/action_wayFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.vector.ui.map.MapFragment"
         android:label="Карта"
-        tools:layout="@layout/fragment_map"/>
+        tools:layout="@layout/fragment_map">
+        <argument
+            android:name="longitude"
+            app:argType="string"
+            android:defaultValue="defValue" />
+        <argument
+            android:name="latitude"
+            app:argType="string"
+            android:defaultValue="defValue" />
+    </fragment>
 </navigation>

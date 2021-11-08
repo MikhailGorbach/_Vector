@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
 import com.example.vector.domain.local.entity.MarkDto
@@ -39,14 +40,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var mMapViewModel: MapViewModel
     private var markers = mutableListOf<MarkDto>()
+    private val args: MapFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
-
         mMapViewModel = ViewModelProvider(this)[MapViewModel::class.java]
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.onResume()
-
         lifecycleScope.launchWhenStarted {
             mMapViewModel.readAllMarkers.observe(viewLifecycleOwner, Observer { ListMarks ->
                 markers = ListMarks.toMutableList()
@@ -89,6 +89,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 mMap.addMarker(MarkerOptions().position(latLng).title(it.title).snippet(it.description))
             }
         }
+        val latitude = args.latitude
+        val longitude = args.longitude
+        if (latitude != "defValue" && longitude != "defValue") {
+            val latLngFromWay = LatLng(latitude.toDouble(), longitude.toDouble())
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngFromWay, mapScale))
+        }
         mMap.setOnMapLongClickListener { currentLatLng ->
             val viewFromFragmentMark = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_mark, null)
             val dialog = createAlertDialog(viewFromFragmentMark)
@@ -102,10 +108,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             }
         }
         mMap.setOnInfoWindowClickListener { markerToDelete ->
-            val latitude = markerToDelete.position.latitude.toString()
-            val longitude = markerToDelete.position.longitude.toString()
+            val latitudeToDelete = markerToDelete.position.latitude.toString()
+            val longitudeToDelete = markerToDelete.position.longitude.toString()
             lifecycleScope.launch(Main) {
-                val mark = findMarker(longitude, latitude)
+                val mark = findMarker(longitudeToDelete, latitudeToDelete)
                 markers.remove(mark)
                 markerToDelete.remove()
                 mMapViewModel.deleteMark(mark!!)

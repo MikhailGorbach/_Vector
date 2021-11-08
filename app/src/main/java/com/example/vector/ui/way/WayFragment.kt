@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vector.R
 import com.example.vector.databinding.FragmentWayBinding
+import com.example.vector.domain.local.entity.MarkDto
 
 class WayFragment : Fragment(R.layout.fragment_way) {
 
@@ -23,6 +25,12 @@ class WayFragment : Fragment(R.layout.fragment_way) {
         val adapter = ListAdapter()
         val recycleView = binding.markRecyclerView
         recycleView.adapter = adapter
+        adapter.setOnItemClickListener(object : ListAdapter.OnItemClickListener{
+            override fun onItemClick(markDto: MarkDto) {
+                val action = WayFragmentDirections.actionWayFragmentToMapFragment(markDto.longitude, markDto.latitude)
+                findNavController().navigate(action)
+            }
+        })
         recycleView.layoutManager = LinearLayoutManager(requireContext())
         lifecycleScope.launchWhenStarted {
             mWayViewModel.readAllMarkers.observe(viewLifecycleOwner, Observer { mark ->
