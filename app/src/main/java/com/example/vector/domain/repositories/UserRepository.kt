@@ -1,4 +1,4 @@
-package com.example.vector.domain
+package com.example.vector.domain.repositories
 
 import com.example.vector.domain.local.entity.UserDto
 import com.example.vector.domain.local.UserDao

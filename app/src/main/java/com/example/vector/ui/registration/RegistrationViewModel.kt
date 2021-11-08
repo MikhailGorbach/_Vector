@@ -3,7 +3,7 @@ package com.example.vector.ui.registration
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vector.domain.UserRepository
+import com.example.vector.domain.repositories.UserRepository
 import com.example.vector.domain.local.DataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

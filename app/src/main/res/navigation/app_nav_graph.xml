@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_way" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.vector.ui.MapFragment"
+        android:name="com.example.vector.ui.map.MapFragment"
         android:label="Карта"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map"/>
 </navigation>
