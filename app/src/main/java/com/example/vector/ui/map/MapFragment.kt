@@ -30,17 +30,15 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+const val mapScale = 12f
+const val onlyOneAddress = 1
+
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
     private lateinit var mMapViewModel: MapViewModel
     private var markers = mutableListOf<MarkDto>()
-
-    companion object {
-        const val mapScale = 12f
-        const val onlyOneAddress = 1
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -171,7 +169,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun permissionNotGranted(): Boolean {
-        return (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED)
+        return (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
 }
