@@ -63,5 +63,26 @@
             android:defaultValue="defValue"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_dialogMarkFragment"
+            app:destination="@id/dialogMarkFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/dialogMarkFragment"
+        android:name="com.example.vector.ui.map.DialogMarkFragment"
+        tools:layout="@layout/fragment_mark">
+        <argument
+            android:name="longitude"
+            android:defaultValue="defValue"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="latitude"
+            android:defaultValue="defValue"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_dialogMarkFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </dialog>
 </navigation>
