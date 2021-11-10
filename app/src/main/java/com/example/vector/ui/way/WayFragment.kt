@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vector.R
 import com.example.vector.databinding.FragmentWayBinding
 import com.example.vector.domain.local.entity.MarkDto
+import kotlinx.android.synthetic.main.fragment_way.swipeRefreshLayout
 
 class WayFragment : Fragment(R.layout.fragment_way) {
 
@@ -22,6 +23,7 @@ class WayFragment : Fragment(R.layout.fragment_way) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentWayBinding.inflate(inflater, container, false)
         mWayViewModel = ViewModelProvider(this)[WayViewModel::class.java]
+        refreshApp()
         val adapter = ListAdapter()
         val recycleView = binding.markRecyclerView
         recycleView.adapter = adapter
@@ -38,5 +40,11 @@ class WayFragment : Fragment(R.layout.fragment_way) {
             })
         }
         return binding.root
+    }
+
+    private fun refreshApp() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 }
