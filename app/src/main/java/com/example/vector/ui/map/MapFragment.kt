@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
 import com.example.vector.domain.local.entity.MarkDto
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,6 +35,11 @@ const val onlyOneAddress = 1
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.routate_open_fab_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.routate_close_fab_anim) }
+    private val fromTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_top_of_fab_anim) }
+    private val toTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_top_of_fab_anim) }
+    private var clicked = false
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
     private lateinit var mMapViewModel: MapViewModel
@@ -77,6 +85,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         mMap = map
+        //map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         setUpPermission()
         lifecycleScope.launch(Main) {
@@ -90,6 +99,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         if (latitude != "defValue" && longitude != "defValue") {
             val latLngFromWay = LatLng(latitude.toDouble(), longitude.toDouble())
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngFromWay, mapScale))
+        }
+        binding.layersFloatingActionBtn.setOnClickListener {
+            onAddButtonClicked()
+        }
+        binding.normalFloatingActionBtn.setOnClickListener {
+            map.mapType = GoogleMap.MAP_TYPE_NORMAL
+            onAddButtonClicked()
+        }
+        binding.terrainFloatingActionBtn.setOnClickListener {
+            map.mapType = GoogleMap.MAP_TYPE_TERRAIN
+            onAddButtonClicked()
+        }
+        binding.satelliteFloatingActionBtn.setOnClickListener {
+            map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+            onAddButtonClicked()
         }
         mMap.setOnMapLongClickListener { currentLatLng ->
             val longitudeForBottomSheet = currentLatLng.longitude.toString()
@@ -105,6 +129,57 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 markers.remove(mark)
                 markerToDelete.remove()
                 mMapViewModel.deleteMark(mark!!)
+            }
+        }
+    }
+
+    private fun onAddButtonClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+        clicked = !clicked
+    }
+
+    private fun setClickable(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                normalFloatingActionBtn.isClickable = true
+                terrainFloatingActionBtn.isClickable = true
+                satelliteFloatingActionBtn.isClickable = true
+            } else {
+                normalFloatingActionBtn.isClickable = false
+                terrainFloatingActionBtn.isClickable = false
+                satelliteFloatingActionBtn.isClickable = false
+            }
+        }
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                normalFloatingActionBtn.visibility = View.INVISIBLE
+                terrainFloatingActionBtn.visibility = View.INVISIBLE
+                satelliteFloatingActionBtn.visibility = View.INVISIBLE
+            } else {
+                normalFloatingActionBtn.visibility = View.VISIBLE
+                terrainFloatingActionBtn.visibility = View.VISIBLE
+                satelliteFloatingActionBtn.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setVisibility(clicked: Boolean) {
+        with(binding) {
+            if (!clicked) {
+                normalFloatingActionBtn.startAnimation(fromTop)
+                terrainFloatingActionBtn.startAnimation(fromTop)
+                satelliteFloatingActionBtn.startAnimation(fromTop)
+                layersFloatingActionBtn.startAnimation(rotateOpen)
+            } else {
+                normalFloatingActionBtn.startAnimation(toTop)
+                terrainFloatingActionBtn.startAnimation(toTop)
+                satelliteFloatingActionBtn.startAnimation(toTop)
+                layersFloatingActionBtn.startAnimation(rotateClose)
             }
         }
     }
