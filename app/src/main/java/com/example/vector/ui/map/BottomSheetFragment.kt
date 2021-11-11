@@ -12,9 +12,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
+    private val args: BottomSheetFragmentArgs by navArgs()
     private lateinit var binding: BottomsheetFragmentBinding
     private lateinit var mMapViewModel: MapViewModel
-    private val args: BottomSheetFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = BottomsheetFragmentBinding.inflate(inflater, container, false)

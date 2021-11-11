@@ -25,11 +25,9 @@ class DialogMarkFragment : DialogFragment() {
             if (inputCheck()) {
                 val title = binding.titleTextInputEditText.text.toString().trim()
                 val description = binding.descriptionTextInputEditText.text.toString().trim()
-                mMapViewModel.addMark(title, description, args.longitude!!, args.latitude!!)
+                mMapViewModel.addMark(title, description, args.longitude, args.latitude)
                 findNavController().navigate(R.id.action_dialogMarkFragment_to_mapFragment)
                 dismiss()
-            } else {
-                return@setOnClickListener
             }
         }
         binding.dismissDialogBtn.setOnClickListener {

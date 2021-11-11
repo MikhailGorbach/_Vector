@@ -11,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,11 +41,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val fromTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_top_of_fab_anim) }
     private val toTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_top_of_fab_anim) }
     private var clicked = false
+    private var markers = mutableListOf<MarkDto>()
+    private val args: MapFragmentArgs by navArgs()
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
     private lateinit var mMapViewModel: MapViewModel
-    private var markers = mutableListOf<MarkDto>()
-    private val args: MapFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -85,7 +86,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         mMap = map
-        //map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         setUpPermission()
         lifecycleScope.launch(Main) {
@@ -128,7 +128,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val mark = findMarker(longitudeToDelete, latitudeToDelete)
                 markers.remove(mark)
                 markerToDelete.remove()
-                mMapViewModel.deleteMark(mark!!)
+                if (mark != null) {
+                    mMapViewModel.deleteMark(mark)
+                }
             }
         }
     }
@@ -157,13 +159,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private fun setAnimation(clicked: Boolean) {
         with(binding) {
             if (!clicked) {
-                normalFloatingActionBtn.visibility = View.INVISIBLE
-                terrainFloatingActionBtn.visibility = View.INVISIBLE
-                satelliteFloatingActionBtn.visibility = View.INVISIBLE
+                normalFloatingActionBtn.isVisible = false
+                terrainFloatingActionBtn.isVisible = false
+                satelliteFloatingActionBtn.isVisible = false
             } else {
-                normalFloatingActionBtn.visibility = View.VISIBLE
-                terrainFloatingActionBtn.visibility = View.VISIBLE
-                satelliteFloatingActionBtn.visibility = View.VISIBLE
+                normalFloatingActionBtn.isVisible = true
+                terrainFloatingActionBtn.isVisible = true
+                satelliteFloatingActionBtn.isVisible = true
             }
         }
     }
