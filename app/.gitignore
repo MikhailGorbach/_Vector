@@ -38,7 +38,8 @@ build/
 captures/
 output.json
 /build.gradle
-    
+/gradle/
+
 #NDK
 obj/
 .externalNativeBuild
