@@ -13,9 +13,9 @@ import com.example.vector.databinding.FragmentMarkBinding
 
 class DialogMarkFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentMarkBinding
     private val args: DialogMarkFragmentArgs by navArgs()
     private lateinit var mMapViewModel: MapViewModel
+    private lateinit var binding: FragmentMarkBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMarkBinding.inflate(inflater, container, false)
