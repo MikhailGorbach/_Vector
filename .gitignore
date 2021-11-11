@@ -33,6 +33,7 @@ Thumbs.db
 .gradle
 gradle
 /gradle
+/.gradle
 build/
 .navigation
 captures/
