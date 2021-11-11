@@ -9,8 +9,8 @@ import com.example.vector.domain.repositories.MarkRepository
 
 class WayViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: MarkRepository
     val readAllMarkers: LiveData<List<MarkDto>>
+    private val repository: MarkRepository
 
     init {
         val markDao = DataBase.getDatabase(application).markDao()
