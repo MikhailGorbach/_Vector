@@ -39,6 +39,7 @@ cd../gradle
 captures/
 output.json
 /build.gradle
+gradle/wrapper/gradle-wrapper.properties
 /gradle/
 
 #NDK
