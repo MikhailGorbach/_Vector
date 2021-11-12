@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class MapViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: MarkRepository
     val readAllMarkers: LiveData<List<MarkDto>>
+    private val repository: MarkRepository
 
     init {
         val markDao = DataBase.getDatabase(application).markDao()

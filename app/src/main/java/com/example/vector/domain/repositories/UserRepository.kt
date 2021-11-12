@@ -1,7 +1,7 @@
 package com.example.vector.domain.repositories
 
-import com.example.vector.domain.local.entity.UserDto
 import com.example.vector.domain.local.UserDao
+import com.example.vector.domain.local.entity.UserDto
 
 class UserRepository(private val userDao: UserDao) {
 
