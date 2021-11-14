@@ -6,7 +6,9 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import com.example.vector.databinding.ActivityAuthentificationBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthentificationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthentificationBinding

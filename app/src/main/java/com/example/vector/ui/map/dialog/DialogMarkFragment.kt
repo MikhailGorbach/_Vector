@@ -1,31 +1,32 @@
-package com.example.vector.ui.map
+package com.example.vector.ui.map.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vector.R
 import com.example.vector.databinding.FragmentMarkBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DialogMarkFragment : DialogFragment() {
 
     private val args: DialogMarkFragmentArgs by navArgs()
-    private lateinit var mMapViewModel: MapViewModel
+    private val mDialogViewModel: DialogViewModel by viewModels()
     private lateinit var binding: FragmentMarkBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMarkBinding.inflate(inflater, container, false)
-        mMapViewModel = ViewModelProvider(this)[MapViewModel::class.java]
 
         binding.applyMarkerBtn.setOnClickListener {
             if (inputCheck()) {
                 val title = binding.titleTextInputEditText.text.toString().trim()
                 val description = binding.descriptionTextInputEditText.text.toString().trim()
-                mMapViewModel.addMark(title, description, args.longitude, args.latitude)
+                mDialogViewModel.addMark(title, description, args.longitude, args.latitude)
                 findNavController().navigate(R.id.action_dialogMarkFragment_to_mapFragment)
                 dismiss()
             }

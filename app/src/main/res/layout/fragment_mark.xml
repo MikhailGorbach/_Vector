@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="15dp">
@@ -16,7 +15,7 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
         app:counterEnabled="true"
-        app:counterMaxLength="20"
+        app:counterMaxLength="18"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:helperTextTextColor="@color/red"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/background_selector_title_ic"
             android:hint="Заголовок"
-            android:maxLength="20"
+            android:maxLength="18"
             android:maxLines="1"
             android:minHeight="48dp"
             android:textSize="16sp" />
@@ -48,7 +47,7 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="18"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:helperTextTextColor="@color/red"
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/background_selector_description_ic"
             android:hint="Описание"
-            android:maxLength="30"
+            android:maxLength="18"
             android:maxLines="1"
             android:minHeight="48dp"
             android:textSize="16sp" />
@@ -76,7 +75,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="190dp"
         android:layout_marginEnd="20dp"
-        android:text="Добавить"
+        android:text="@string/addmarker_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dismissDialogBtn"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +87,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="190dp"
         android:layout_marginEnd="10dp"
-        android:text="Отмена"
+        android:text="@string/deny_btn"
         app:layout_constraintEnd_toStartOf="@+id/applyMarkerBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

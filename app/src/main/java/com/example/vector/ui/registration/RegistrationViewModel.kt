@@ -5,10 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vector.domain.repositories.UserRepository
 import com.example.vector.domain.local.DataBase
+import com.example.vector.domain.local.entity.UserDto
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RegistrationViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class RegistrationViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     private val repository: UserRepository
 
@@ -21,5 +26,9 @@ class RegistrationViewModel(application: Application) : AndroidViewModel(applica
         viewModelScope.launch(Dispatchers.IO) {
             repository.addUser(login, email, password)
         }
+    }
+
+    suspend fun findUser(login: String?): UserDto? = withContext(Dispatchers.IO) {
+        return@withContext repository.findUser(login)
     }
 }

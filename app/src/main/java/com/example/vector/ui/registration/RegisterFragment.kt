@@ -5,33 +5,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.vector.R
 import com.example.vector.databinding.FragmentRegisterBinding
+import com.example.vector.domain.local.entity.UserDto
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var mRegistrationViewModel: RegistrationViewModel
+    private val mRegistrationViewModel: RegistrationViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        mRegistrationViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
         binding.registrationBtn.setOnClickListener {
-            insertDataToDatabase()
+            lifecycleScope.launch(Main) {
+                insertDataToDatabase()
+            }
         }
         return binding.root
     }
 
-    private fun insertDataToDatabase() {
+    private suspend fun insertDataToDatabase() {
         with(binding) {
-            if (inputCheck()) {
+            if (inputCheck() && userNotExists()) {
                 mRegistrationViewModel.addUser(
-                    loginEt.text.toString(),
-                    emailEt.text.toString(),
-                    pwdFirstEt.text.toString()
+                    loginEt.text.toString().trim(),
+                    emailEt.text.toString().trim(),
+                    pwdFirstEt.text.toString().trim()
                 )
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             }
@@ -40,6 +47,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun inputCheck(): Boolean {
         return (loginCheck() && emailCheck() && passwordCheck() && passwordMatch() && agreeCheck())
+    }
+
+    private suspend fun userNotExists(): Boolean {
+        return if (findUser(binding.loginEt.text.toString()) == null) {
+            binding.loginRegTextInputLayout.error = null
+            true
+        } else {
+            binding.loginRegTextInputLayout.error = "Такой пользватель уже существует"
+            false
+        }
     }
 
     private fun loginCheck(): Boolean {
@@ -95,5 +112,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun agreeCheck(): Boolean {
         return binding.agreeSwtch.isChecked
+    }
+
+    private suspend fun findUser(loginText: String): UserDto? {
+        return mRegistrationViewModel.findUser(loginText)
     }
 }

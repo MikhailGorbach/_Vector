@@ -3,6 +3,7 @@ package com.example.vector.ui.map
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,27 +14,29 @@ import android.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
 import com.example.vector.domain.local.entity.MarkDto
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.Dispatchers.IO
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 const val mapScale = 12f
 const val onlyOneAddress = 1
 
+@AndroidEntryPoint
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.routate_open_fab_anim) }
@@ -43,15 +46,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private var clicked = false
     private var markers = mutableListOf<MarkDto>()
     private val args: MapFragmentArgs by navArgs()
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
-    private lateinit var mMapViewModel: MapViewModel
+    private val mMapViewModel: MapViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
-        mMapViewModel = ViewModelProvider(this)[MapViewModel::class.java]
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.onResume()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         lifecycleScope.launchWhenStarted {
             mMapViewModel.readAllMarkers.observe(viewLifecycleOwner, Observer { ListMarks ->
                 markers = ListMarks.toMutableList()
@@ -80,6 +85,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 return false
             }
         })
+        binding.getUserLocationFloatingActionBtn.setOnClickListener {
+            setUpPermission()
+            try {
+                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        lastLocation = location
+                        val currentLatLng = LatLng(location.latitude, location.longitude)
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                        mMap.addMarker(MarkerOptions().position(currentLatLng).title("Вы здесь"))
+                    }
+                }
+            } catch (e: SecurityException) {
+                println(e)
+            }
+        }
         binding.mapView.getMapAsync(this)
         return binding.root
     }
@@ -99,6 +119,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         if (latitude != "defValue" && longitude != "defValue") {
             val latLngFromWay = LatLng(latitude.toDouble(), longitude.toDouble())
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngFromWay, mapScale))
+        }
+        if (args.permitionToDelete) {
+            lifecycleScope.launch(Main) {
+                markers.forEach {
+                    val marker = it
+                    mMapViewModel.deleteMark(marker)
+                }
+                markers.clear()
+                mMap.clear()
+            }
         }
         binding.layersFloatingActionBtn.setOnClickListener {
             onAddButtonClicked()
@@ -186,18 +216,23 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private suspend fun findMarker(longitude: String, latitude: String): MarkDto? =
-        withContext(IO) {
-            return@withContext mMapViewModel.findMarker(longitude, latitude)
-        }
+    private suspend fun findMarker(longitude: String, latitude: String): MarkDto? {
+        return mMapViewModel.findMarker(longitude, latitude)
+    }
 
     private fun setUpPermission() {
         if (permissionNotGranted()) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                1
+            )
         }
     }
 
     private fun permissionNotGranted(): Boolean {
-        return (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        return (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
 }
