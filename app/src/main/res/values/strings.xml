@@ -25,9 +25,21 @@
 
     <!--ProfileFragment-->
     <string name="logout_btn">Выйти</string>
-    <string name="welcometextview">Welcome</string>
+    <string name="welcome_textview">Добро пожаловать!</string>
 
     <!--WayFragment-->
-    <string name="wayfragment">WayFragment</string>
+    <string name="longitude_textview">Longitude</string>
+    <string name="latitude_textview">Latitude</string>
+    <string name="description_textview">Description</string>
+    <string name="title_textview">Title</string>
+
+    <!--BottomSheetFragment-->
+    <string name="addmark_textview">Добавить</string>
+    <string name="sharemark_textview">Поделиться</string>
+    <string name="deletemarkers_textview">Очистить</string>
+
+    <!--DialogFragment-->
+    <string name="addmarker_btn">Добавить</string>
+    <string name="deny_btn">Отмена</string>
 
 </resources>

@@ -8,27 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.vector.MainActivity
 import com.example.vector.R
 import com.example.vector.databinding.FragmentLoginBinding
 import com.example.vector.domain.local.entity.UserDto
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var mLoginViewModel: LoginViewModel
+    private val mLoginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mLoginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
         if (isSignIn()) {
             startActivity(Intent(requireActivity(), MainActivity::class.java))
         } else {
@@ -36,14 +34,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 lifecycleScope.launch(Main) {
                     with(binding) {
                         val user = findUser(loginEdt.text.toString().trim())
-                        if (findUser(loginEdt.text.toString()) == null) {
+                        if (findUser(loginEdt.text.toString().trim()) == null) {
                             loginTextInputLayout.error = "Такого пользователя не существует"
                             pwdTextInputLayout.error = null
-                        } else if (user?.password != pwdEdt.text.toString()) {
+                        } else if (user?.password != pwdEdt.text.toString().trim()) {
                             pwdTextInputLayout.error = "Неправильный пароль"
                             loginTextInputLayout.error = null
-                        } else if (user.login == loginEdt.text.toString()
-                                .trim() && user.password == pwdEdt.text.toString().trim()
+                        } else if (user.login == loginEdt.text.toString().trim() && user.password == pwdEdt.text.toString().trim()
                         ) {
                             saveSession()
                             startActivity(Intent(requireActivity(), MainActivity::class.java))
@@ -57,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun saveSession() {
         sharedPreferences.edit().putBoolean("USER_DEFINED", true).apply()
-        sharedPreferences.edit().putString("USER_LOGIN", binding.loginEdt.text.toString()).apply()
+        sharedPreferences.edit().putString("USER_LOGIN", binding.loginEdt.text.toString().trim()).apply()
     }
 
     private fun isSignIn(): Boolean {
@@ -66,8 +63,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         return sharedPreferences.getBoolean("USER_DEFINED", false)
     }
 
-    private suspend fun findUser(loginText: String): UserDto? =
-        withContext(Dispatchers.IO) {
-            return@withContext mLoginViewModel.findUser(loginText)
-        }
+    private suspend fun findUser(loginText: String): UserDto? {
+        return mLoginViewModel.findUser(loginText)
+    }
 }

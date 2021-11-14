@@ -6,8 +6,11 @@ import androidx.lifecycle.LiveData
 import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.local.entity.MarkDto
 import com.example.vector.domain.repositories.MarkRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class WayViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class WayViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     val readAllMarkers: LiveData<List<MarkDto>>
     private val repository: MarkRepository

@@ -7,10 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.local.entity.MarkDto
 import com.example.vector.domain.repositories.MarkRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MapViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class MapViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     val readAllMarkers: LiveData<List<MarkDto>>
     private val repository: MarkRepository
@@ -21,19 +25,13 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         readAllMarkers = repository.readAllMarkers
     }
 
-    fun addMark(title: String, description: String, longitude: String, latitude: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addMark(title, description, longitude, latitude)
-        }
-    }
-
     fun deleteMark(markDto: MarkDto) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteMark(markDto)
         }
     }
 
-    fun findMarker(longitude: String, latitude: String): MarkDto? {
-        return repository.findMarker(longitude, latitude)
+    suspend fun findMarker(longitude: String, latitude: String): MarkDto? = withContext(Dispatchers.IO) {
+        return@withContext repository.findMarker(longitude, latitude)
     }
 }

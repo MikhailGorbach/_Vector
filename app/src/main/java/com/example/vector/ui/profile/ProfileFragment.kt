@@ -11,26 +11,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.vector.AuthentificationActivity
 import com.example.vector.R
 import com.example.vector.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.welcomeTextView
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var mProfileViewModel: ProfileViewModel
+    private val mProfileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        mProfileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         lifecycleScope.launch(Main) {
             binding.welcomeTextView.text = userInformation()
         }
@@ -46,13 +45,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         return binding.root
     }
 
-    private suspend fun userInformation(): String =
-        withContext(Dispatchers.IO) {
-            sharedPreferences = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-            val userLogin = sharedPreferences.getString("USER_LOGIN", null)
-            val user = mProfileViewModel.findUser(userLogin)
-            return@withContext "Добро пожаловать, ${user?.login}!\nПочта: ${user?.email}\nПароль: ${user?.password}"
-        }
+    private suspend fun userInformation(): String {
+        sharedPreferences = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val userLogin = sharedPreferences.getString("USER_LOGIN", null)
+        val user = mProfileViewModel.findUser(userLogin)
+        return "Добро пожаловать, ${user?.login}!\nПочта: ${user?.email}\nПароль: ${user?.password}"
+    }
 
     private fun signOut() {
         sharedPreferences = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)

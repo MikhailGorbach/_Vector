@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vector.R
 import com.example.vector.domain.local.entity.MarkDto
 import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.descriptionTextView
+import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.latitudeTextView
+import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.longitudeTextView
 import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.titleTextView
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -38,6 +40,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
         val currentItem = markList[position]
         holder.itemView.titleTextView.text = currentItem.title
         holder.itemView.descriptionTextView.text = currentItem.description
+        holder.itemView.latitudeTextView.text = currentItem.latitude
+        holder.itemView.longitudeTextView.text = currentItem.longitude
     }
 
     override fun getItemCount(): Int {
