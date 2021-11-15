@@ -2,6 +2,7 @@ package com.example.vector.ui.map.dialog
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.repositories.MarkRepository
@@ -11,14 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DialogViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
-
-    private val repository: MarkRepository
-
-    init {
-        val markDao = DataBase.getDatabase(application).markDao()
-        repository = MarkRepository(markDao)
-    }
+class DialogViewModel @Inject constructor(private val repository: MarkRepository) : ViewModel() {
 
     fun addMark(title: String, description: String, longitude: String, latitude: String) {
         viewModelScope.launch(Dispatchers.IO) {

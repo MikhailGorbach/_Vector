@@ -17,7 +17,7 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
         app:counterEnabled="true"
-        app:counterMaxLength="18"
+        app:counterMaxLength="12"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:helperTextTextColor="@color/red"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/selector_title_ic"
             android:hint="@string/mark_title_textview"
-            android:maxLength="18"
+            android:maxLength="12"
             android:maxLines="1"
             android:minHeight="48dp"
             android:textSize="16sp" />

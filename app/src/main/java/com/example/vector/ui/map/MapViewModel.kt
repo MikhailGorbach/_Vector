@@ -1,10 +1,7 @@
 package com.example.vector.ui.map
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.local.entity.MarkDto
 import com.example.vector.domain.repositories.MarkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,16 +11,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class MapViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
+class MapViewModel @Inject constructor(private val repository: MarkRepository) : ViewModel() {
 
-    val readAllMarkers: LiveData<List<MarkDto>>
-    private val repository: MarkRepository
-
-    init {
-        val markDao = DataBase.getDatabase(application).markDao()
-        repository = MarkRepository(markDao)
-        readAllMarkers = repository.readAllMarkers
-    }
+    val readAllMarkers = repository.readAllMarkers
 
     fun deleteMark(markDto: MarkDto) {
         viewModelScope.launch(Dispatchers.IO) {

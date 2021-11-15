@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -111,7 +112,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun agreeCheck(): Boolean {
-        return binding.agreeSwtch.isChecked
+        return if(binding.agreeSwtch.isChecked) {
+            true
+        } else {
+            Toast.makeText(requireContext(), "Согласитесь с правилами", Toast.LENGTH_SHORT).show()
+            false
+        }
     }
 
     private suspend fun findUser(loginText: String): UserDto? {
