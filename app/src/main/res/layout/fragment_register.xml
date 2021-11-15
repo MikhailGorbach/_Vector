@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="SpUsage">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/loginRegTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="75dp"
-        android:layout_marginEnd="25dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -30,13 +30,13 @@
             android:id="@+id/loginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_person_ic"
+            android:drawableStart="@drawable/selector_person_ic"
             android:hint="@string/login_edt"
             android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -44,9 +44,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginHorizontal="25dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -64,13 +63,13 @@
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_email_ic"
+            android:drawableStart="@drawable/selector_email_ic"
             android:hint="@string/email_edt"
             android:inputType="textEmailAddress"
             android:maxLength="30"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -78,9 +77,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginHorizontal="25dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -99,13 +97,13 @@
             android:id="@+id/pwdFirstEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:drawableStart="@drawable/selector_lock_ic"
             android:hint="@string/password_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -113,9 +111,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginHorizontal="25dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -134,25 +131,24 @@
             android:id="@+id/pwdSecondEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:drawableStart="@drawable/selector_lock_ic"
             android:hint="@string/repeatPassword_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Switch
         android:id="@+id/agreeSwtch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginHorizontal="25dp"
         android:minHeight="48dp"
         android:switchPadding="145dp"
         android:text="@string/agree_switch"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pwdSecondTextInputLayout"
@@ -162,12 +158,11 @@
         android:id="@+id/registrationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/background_registrationbtn"
+        android:layout_marginHorizontal="100dp"
+        android:background="@drawable/background_rounded_registration_btn"
         android:text="@string/registration_btn"
         android:textColor="@color/blue"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -33,14 +33,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             binding.enterBtn.setOnClickListener {
                 lifecycleScope.launch(Main) {
                     with(binding) {
-                        val user = findUser(loginEdt.text.toString().trim())
-                        if (findUser(loginEdt.text.toString().trim()) == null) {
+                        val user = findUser(loginTextInputEditText.text.toString().trim())
+                        if (findUser(loginTextInputEditText.text.toString().trim()) == null) {
                             loginTextInputLayout.error = "Такого пользователя не существует"
                             pwdTextInputLayout.error = null
-                        } else if (user?.password != pwdEdt.text.toString().trim()) {
+                        } else if (user?.password != pwdTextInputEditText.text.toString().trim()) {
                             pwdTextInputLayout.error = "Неправильный пароль"
                             loginTextInputLayout.error = null
-                        } else if (user.login == loginEdt.text.toString().trim() && user.password == pwdEdt.text.toString().trim()
+                        } else if (user.login == loginTextInputEditText.text.toString().trim() && user.password == pwdTextInputEditText.text.toString().trim()
                         ) {
                             saveSession()
                             startActivity(Intent(requireActivity(), MainActivity::class.java))
@@ -54,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun saveSession() {
         sharedPreferences.edit().putBoolean("USER_DEFINED", true).apply()
-        sharedPreferences.edit().putString("USER_LOGIN", binding.loginEdt.text.toString().trim()).apply()
+        sharedPreferences.edit().putString("USER_LOGIN", binding.loginTextInputEditText.text.toString().trim()).apply()
     }
 
     private fun isSignIn(): Boolean {

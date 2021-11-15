@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
     android:paddingStart="10dp"
-    android:paddingEnd="10dp">
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp"
+    tools:ignore="SpUsage">
 
     <View
         android:id="@+id/removeView"
@@ -20,47 +22,47 @@
         android:id="@+id/simplelineView"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="10dp"
         android:background="@color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/removeView" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/addMarkerImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="65dp"
-        android:background="@drawable/background_selector_btn_add_marker"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_btn_add_marker"
         android:padding="15dp"
         android:src="@drawable/ic_bookmark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/removeView" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/shareMarkerImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="65dp"
-        android:background="@drawable/background_selector_btn_share_marker"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_btn_share_marker"
         android:padding="15dp"
         android:src="@drawable/ic_share"
         app:layout_constraintStart_toEndOf="@+id/addMarkerImageBtn"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/removeView" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/deleteMarkersImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="65dp"
-        android:background="@drawable/background_selector_btn_delete_marker"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_btn_delete_marker"
         android:padding="15dp"
         android:src="@drawable/ic_delete_forever"
         app:layout_constraintStart_toEndOf="@+id/shareMarkerImageBtn"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/removeView" />
 
     <TextView
         android:id="@+id/addMarkerTextView"
@@ -70,8 +72,10 @@
         android:layout_marginTop="15dp"
         android:text="@string/addmark_textview"
         android:textColor="@color/green"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/navigateToTextView"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addMarkerImageBtn" />
 
@@ -79,11 +83,14 @@
         android:id="@+id/navigateToTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="60dp"
         android:text="@string/sharemark_textview"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/navigateFromTextView"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/addMarkerTextView"
         app:layout_constraintTop_toBottomOf="@+id/shareMarkerImageBtn" />
 
@@ -91,11 +98,13 @@
         android:id="@+id/navigateFromTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/deletemarkers_textview"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/navigateToTextView"
         app:layout_constraintTop_toBottomOf="@+id/deleteMarkersImageBtn" />
 

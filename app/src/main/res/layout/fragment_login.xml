@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="SpUsage">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/loginTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="75dp"
-        android:layout_marginEnd="25dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -25,11 +26,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginEdt"
+            android:id="@+id/loginTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_person_ic"
+            android:drawableStart="@drawable/selector_person_ic"
             android:hint="@string/login_edt"
+            android:textSize="16dp"
             android:maxLength="20"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,12 +41,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="5dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusTopStart="12dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginTextInputLayout"
@@ -52,31 +55,30 @@
         app:passwordToggleTint="@color/blue">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pwdEdt"
+            android:id="@+id/pwdTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_lock_ic"
+            android:drawableStart="@drawable/selector_lock_ic"
             android:hint="@string/password_edt"
             android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/enterBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="255dp"
-        android:layout_marginRight="120dp"
-        android:background="@drawable/background_selector_btn_enter"
+        android:layout_marginHorizontal="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_btn_enter"
         android:text="@string/enter_btn"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pwdTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

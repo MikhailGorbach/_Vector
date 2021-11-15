@@ -32,3 +32,4 @@ class RegistrationViewModel @Inject constructor(application: Application) : Andr
         return@withContext repository.findUser(login)
     }
 }
+

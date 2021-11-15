@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vector.R
 import com.example.vector.domain.local.entity.MarkDto
-import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.descriptionTextView
-import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.latitudeTextView
-import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.longitudeTextView
-import kotlinx.android.synthetic.main.custom_row_for_recyclerview.view.titleTextView
+import kotlinx.android.synthetic.main.item_marker.view.descriptionTextView
+import kotlinx.android.synthetic.main.item_marker.view.latitudeTextView
+import kotlinx.android.synthetic.main.item_marker.view.longitudeTextView
+import kotlinx.android.synthetic.main.item_marker.view.titleTextView
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
@@ -33,7 +33,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row_for_recyclerview, parent, false), mListener, markList)
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_marker, parent, false), mListener, markList)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

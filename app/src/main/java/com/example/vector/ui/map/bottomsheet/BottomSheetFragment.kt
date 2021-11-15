@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.vector.databinding.BottomsheetFragmentBinding
+import com.example.vector.databinding.FragmentBottomsheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val args: BottomSheetFragmentArgs by navArgs()
-    private lateinit var binding: BottomsheetFragmentBinding
+    private lateinit var binding: FragmentBottomsheetBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = BottomsheetFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentBottomsheetBinding.inflate(inflater, container, false)
 
         binding.addMarkerImageBtn.setOnClickListener {
             val action = BottomSheetFragmentDirections.actionBottomSheetFragmentToDialogMarkFragment(args.longitude, args.latitude)

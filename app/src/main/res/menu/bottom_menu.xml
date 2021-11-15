@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/wayFragment"
-        android:icon="@drawable/menu_explore_ic"
+        android:icon="@drawable/menu_ic_explore"
         android:title="@string/menu_found" />
     <item
         android:id="@+id/mapFragment"
-        android:icon="@drawable/menu_map_ic"
+        android:icon="@drawable/menu_ic_map"
         android:title="@string/menu_map" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/menu_account_ic"
+        android:icon="@drawable/menu_ic_account"
         android:title="@string/menu_profile" />
 </menu>

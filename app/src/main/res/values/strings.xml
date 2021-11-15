@@ -1,4 +1,6 @@
 <resources>
+
+    <!--ApplicationName-->
     <string name="app_name">Vector</string>
 
     <!--Login and Registration Fragment-->
@@ -41,5 +43,7 @@
     <!--DialogFragment-->
     <string name="addmarker_btn">Добавить</string>
     <string name="deny_btn">Отмена</string>
+    <string name="mark_title_textview">Заголовок</string>
+    <string name="mark_description_textview">Описание</string>
 
 </resources>

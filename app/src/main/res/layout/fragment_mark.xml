@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:padding="15dp"
+    tools:ignore="SpUsage">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleTextInputLayout"
@@ -28,8 +30,8 @@
             android:id="@+id/titleTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_title_ic"
-            android:hint="Заголовок"
+            android:drawableStart="@drawable/selector_title_ic"
+            android:hint="@string/mark_title_textview"
             android:maxLength="18"
             android:maxLines="1"
             android:minHeight="48dp"
@@ -60,12 +62,12 @@
             android:id="@+id/descriptionTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/background_selector_description_ic"
-            android:hint="Описание"
+            android:drawableStart="@drawable/selector_description_ic"
+            android:hint="@string/mark_description_textview"
             android:maxLength="18"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -76,6 +78,7 @@
         android:layout_marginTop="190dp"
         android:layout_marginEnd="20dp"
         android:text="@string/addmarker_btn"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dismissDialogBtn"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,6 +91,7 @@
         android:layout_marginTop="190dp"
         android:layout_marginEnd="10dp"
         android:text="@string/deny_btn"
+        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/applyMarkerBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

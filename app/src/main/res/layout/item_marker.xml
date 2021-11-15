@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    tools:ignore="SpUsage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
             android:layout_marginStart="10dp"
             android:text="@string/title_textview"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,36 +33,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="5dp"
             android:text="@string/description_textview"
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
         <TextView
             android:id="@+id/latitudeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="190dp"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="10dp"
             android:text="@string/latitude_textview"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/titleTextView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/longitudeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="210dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="5dp"
             android:text="@string/longitude_textview"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/descriptionTextView"
+            app:layout_constraintTop_toBottomOf="@+id/latitudeTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
