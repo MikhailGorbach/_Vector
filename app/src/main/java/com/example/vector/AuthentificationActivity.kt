@@ -3,9 +3,9 @@ package com.example.vector
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import com.example.vector.databinding.ActivityAuthentificationBinding
+import com.example.vector.utils.setBtnTextColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +34,7 @@ class AuthentificationActivity : AppCompatActivity() {
     private fun changeButtons(notSelectedBtn: AppCompatButton, selectedBtn: AppCompatButton, valid: Boolean) {
         notSelectedBtn.isSelected = valid
         selectedBtn.isSelected = valid
-        notSelectedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
-        selectedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.blue))
+        setBtnTextColor(notSelectedBtn, R.color.white)
+        setBtnTextColor(selectedBtn, R.color.blue)
     }
 }

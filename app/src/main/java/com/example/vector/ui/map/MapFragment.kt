@@ -12,7 +12,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,6 +21,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.vector.R
 import com.example.vector.databinding.FragmentMapBinding
 import com.example.vector.domain.local.entity.MarkDto
+import com.example.vector.ui.map.utils.setClickable
+import com.example.vector.ui.map.utils.setVisibility
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -43,14 +44,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.routate_close_fab_anim) }
     private val fromTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.from_top_of_fab_anim) }
     private val toTop: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.to_top_of_fab_anim) }
+    private val args: MapFragmentArgs by navArgs()
+    private val mMapViewModel: MapViewModel by viewModels()
     private var clicked = false
     private var markers = mutableListOf<MarkDto>()
-    private val args: MapFragmentArgs by navArgs()
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
-    private val mMapViewModel: MapViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -166,41 +167,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun onAddButtonClicked() {
-        setVisibility(clicked)
-        setAnimation(clicked)
-        setClickable(clicked)
-        clicked = !clicked
-    }
-
-    private fun setClickable(clicked: Boolean) {
         with(binding) {
-            if (!clicked) {
-                normalFloatingActionBtn.isClickable = true
-                terrainFloatingActionBtn.isClickable = true
-                satelliteFloatingActionBtn.isClickable = true
-            } else {
-                normalFloatingActionBtn.isClickable = false
-                terrainFloatingActionBtn.isClickable = false
-                satelliteFloatingActionBtn.isClickable = false
-            }
+            requireActivity().setClickable(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
+            requireActivity().setVisibility(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
+            setAnimation(clicked)
+            clicked = !clicked
         }
     }
 
     private fun setAnimation(clicked: Boolean) {
-        with(binding) {
-            if (!clicked) {
-                normalFloatingActionBtn.isVisible = false
-                terrainFloatingActionBtn.isVisible = false
-                satelliteFloatingActionBtn.isVisible = false
-            } else {
-                normalFloatingActionBtn.isVisible = true
-                terrainFloatingActionBtn.isVisible = true
-                satelliteFloatingActionBtn.isVisible = true
-            }
-        }
-    }
-
-    private fun setVisibility(clicked: Boolean) {
         with(binding) {
             if (!clicked) {
                 normalFloatingActionBtn.startAnimation(fromTop)

@@ -7,8 +7,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.vector.domain.local.entity.MarkDto
-import com.example.vector.domain.local.entity.UserDto
-import com.google.android.gms.maps.model.LatLng
 
 @Dao
 interface MarkDao {

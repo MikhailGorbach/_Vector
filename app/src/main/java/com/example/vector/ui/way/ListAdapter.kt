@@ -38,10 +38,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = markList[position]
-        holder.itemView.titleTextView.text = currentItem.title
-        holder.itemView.descriptionTextView.text = currentItem.description
-        holder.itemView.latitudeTextView.text = currentItem.latitude
-        holder.itemView.longitudeTextView.text = currentItem.longitude
+        with(holder) {
+            itemView.titleTextView.text = currentItem.title
+            itemView.descriptionTextView.text = currentItem.description
+            itemView.latitudeTextView.text = currentItem.latitude
+            itemView.longitudeTextView.text = currentItem.longitude
+        }
     }
 
     override fun getItemCount(): Int {
