@@ -1,10 +1,10 @@
 package com.example.vector.ui.map.utils
 
-import android.content.Context
+import android.app.Activity
 import androidx.core.view.isVisible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-fun Context.setClickable(
+fun Activity.setClickable(
     clicked: Boolean,
     normalFloatingActionBtn: FloatingActionButton,
     terrainFloatingActionBtn: FloatingActionButton,
@@ -21,7 +21,7 @@ fun Context.setClickable(
     }
 }
 
-fun Context.setVisibility(
+fun Activity.setVisibility(
     clicked: Boolean,
     normalFloatingActionBtn: FloatingActionButton,
     terrainFloatingActionBtn: FloatingActionButton,

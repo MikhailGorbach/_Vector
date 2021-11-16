@@ -168,8 +168,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun onAddButtonClicked() {
         with(binding) {
-            context?.setClickable(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
-            context?.setVisibility(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
+            requireActivity().setClickable(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
+            requireActivity().setVisibility(clicked, normalFloatingActionBtn, terrainFloatingActionBtn, satelliteFloatingActionBtn)
             setAnimation(clicked)
             clicked = !clicked
         }

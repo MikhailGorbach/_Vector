@@ -1,8 +1,6 @@
 package com.example.vector.di
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.provider.DocumentsContract
 import androidx.room.Room
 import com.example.vector.domain.local.DataBase
 import com.example.vector.domain.local.MarkDao
