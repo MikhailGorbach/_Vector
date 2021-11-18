@@ -17,6 +17,7 @@ class DialogMarkFragment : DialogFragment() {
 
     private val args: DialogMarkFragmentArgs by navArgs()
     private val mDialogViewModel: DialogViewModel by viewModels()
+
     private lateinit var binding: FragmentMarkBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
